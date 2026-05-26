@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VANZA STORE — Техника Apple · Samsung · Dyson</title>
+<meta name="description" content="VANZA STORE — оригинальная техника Apple, Samsung, Dyson в СПб. iPhone, MacBook, AirPods по лучшим ценам."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+/* ───────────────────────────────────────────
+   THEMES
+─────────────────────────────────────────── */
+:root,[data-theme="light"]{
+  --bg:#FFFFFF; --bg2:#F5F7FA; --bg3:#EEF1F7;
+  --card:#FFFFFF; --card2:#F5F7FA;
+  --border:#E2E8F0; --border2:#CBD5E1;
+  --text:#0D1421; --text2:#475569; --text3:#94A3B8;
+  --navy:#0D2B5E; --blue:#1A56DB; --blue-l:#EBF1FF; --blue-ll:#F0F7FF;
+  --green:#10B981; --red:#EF4444; --orange:#F59E0B;
+  --nav-bg:rgba(255,255,255,.95);
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+  --shadow-md:0 4px 20px rgba(0,0,0,.09);
+  --shadow-lg:0 12px 48px rgba(0,0,0,.13);
+}
+[data-theme="dark"]{
+  --bg:#0A0E1A; --bg2:#111827; --bg3:#1E2536;
+  --card:#111827; --card2:#1E2536;
+  --border:#1E2D45; --border2:#2D3D55;
+  --text:#F1F5F9; --text2:#94A3B8; --text3:#475569;
+  --navy:#3B82F6; --blue:#60A5FA; --blue-l:#1E3A5F; --blue-ll:#162236;
+  --green:#34D399; --red:#F87171; --orange:#FBBF24;
+  --nav-bg:rgba(10,14,26,.96);
+  --shadow:0 1px 3px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.2);
+  --shadow-md:0 4px 20px rgba(0,0,0,.4);
+  --shadow-lg:0 12px 48px rgba(0,0,0,.5);
+}
+
+/* ───────────────────────────────────────────
+   BASE
+─────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden;transition:background .3s,color .3s;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+button{font-family:'Manrope',sans-serif;cursor:pointer;}
+textarea{font-family:'Manrope',sans-serif;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px;}
+
+/* ───────────────────────────────────────────
+   LAYOUT VARS
+─────────────────────────────────────────── */
+:root{ --nav-h:64px; --r:16px; --r-sm:10px; }
+
+/* ───────────────────────────────────────────
+   NAV
+─────────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:var(--nav-h);background:var(--nav-bg);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  transition:background .3s,border-color .3s;
+}
+.nav-inner{
+  max-width:1440px;margin:0 auto;padding:0 24px;
+  height:100%;display:flex;align-items:center;gap:8px;
+}
+/* Logo SVG */
+.logo-wrap{background:none;border:none;cursor:pointer;padding:0;line-height:0;margin-right:8px;}
+.logo-svg{height:30px;}
+
+.nav-link{
+  font-size:13px;font-weight:700;color:var(--text2);
+  padding:7px 13px;border-radius:var(--r-sm);
+  border:none;background:none;
+  transition:color .15s,background .15s;white-space:nowrap;
+}
+.nav-link:hover{color:var(--text);background:var(--bg2);}
+.nav-link.active{color:var(--blue);background:var(--blue-l);}
+
+.nav-spacer{flex:1;}
+
+/* Icon buttons */
+.nav-icon{
+  position:relative;
+  width:40px;height:40px;border-radius:var(--r-sm);
+  border:1.5px solid var(--border);background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;color:var(--text2);
+}
+.nav-icon:hover{border-color:var(--blue);color:var(--blue);}
+.nav-badge{
+  position:absolute;top:-5px;right:-5px;
+  min-width:18px;height:18px;border-radius:99px;
+  background:var(--blue);color:#fff;
+  font-size:10px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 4px;border:2px solid var(--bg);
+  pointer-events:none;
+}
+.nav-badge:empty,.nav-badge[data-count="0"]{display:none;}
+
+.btn-nav-tg{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--navy);color:#fff;
+  font-size:13px;font-weight:700;
+  padding:9px 18px;border-radius:var(--r-sm);
+  border:none;white-space:nowrap;
+  transition:opacity .15s,transform .15s;
+}
+.btn-nav-tg:hover{opacity:.88;transform:translateY(-1px);}
+
+#burger{display:none;width:40px;height:40px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:var(--card);align-items:center;justify-content:center;flex-direction:column;gap:4px;}
+#burger span{display:block;width:16px;height:1.5px;background:var(--text);border-radius:1px;}
+
+/* ───────────────────────────────────────────
+   MOBILE DRAWER
+─────────────────────────────────────────── */
+#mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:600;backdrop-filter:blur(2px);}
+#mob-overlay.open{display:block;}
+#mob-drawer{
+  position:fixed;top:0;right:-110%;width:min(340px,88vw);height:100vh;
+  background:var(--card);border-left:1px solid var(--border);
+  z-index:700;transition:right .3s cubic-bezier(.4,0,.2,1);
+  padding:76px 24px 32px;display:flex;flex-direction:column;gap:16px;
+  overflow-y:auto;
+}
+#mob-drawer.open{right:0;}
+.mob-close{position:absolute;top:18px;right:18px;background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r-sm);width:36px;height:36px;font-size:18px;color:var(--text2);}
+.mob-navlink{font-size:16px;font-weight:700;color:var(--text);background:none;border:none;text-align:left;padding:4px 0;}
+
+/* ───────────────────────────────────────────
+   PAGES
+─────────────────────────────────────────── */
+.page{display:none;padding-top:var(--nav-h);}
+.page.active{display:block;}
+
+/* ───────────────────────────────────────────
+   BUTTONS
+─────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Manrope',sans-serif;font-weight:700;border:none;cursor:pointer;transition:all .2s;text-decoration:none;}
+.btn-primary{background:var(--navy);color:#fff;border-radius:var(--r-sm);padding:14px 28px;font-size:14px;}
+.btn-primary:hover{background:var(--blue);box-shadow:0 6px 20px rgba(26,86,219,.3);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid var(--navy);border-radius:var(--r-sm);padding:12px 26px;font-size:14px;}
+.btn-outline:hover{background:var(--navy);color:#fff;}
+.btn-sm{padding:9px 18px;font-size:12px;border-radius:8px;}
+.btn-ghost{background:var(--bg2);color:var(--text);border-radius:8px;padding:9px 16px;font-size:13px;border:1.5px solid var(--border);}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ───────────────────────────────────────────
+   HERO
+─────────────────────────────────────────── */
+#hero{
+  min-height:calc(100vh - var(--nav-h));background:var(--bg);
+  display:flex;align-items:center;position:relative;overflow:hidden;
+}
+.hero-bg-dot{
+  position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(26,86,219,.12),transparent 70%);
+}
+.hero-inner{max-width:1440px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:var(--blue-l);color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:99px;padding:6px 16px;margin-bottom:28px;}
+.hero-pill-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-h1{font-size:clamp(42px,6vw,80px);font-weight:900;line-height:.97;letter-spacing:-2.5px;color:var(--navy);margin-bottom:22px;}
+.hero-h1 em{font-style:normal;color:var(--blue);}
+.hero-sub{font-size:clamp(15px,1.4vw,18px);color:var(--text2);line-height:1.7;max-width:420px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
+.hero-trust{display:flex;gap:24px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text2);}
+.trust-icon{font-size:18px;}
+
+.hero-visual{position:relative;}
+.hero-img-card{background:var(--bg2);border-radius:28px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lg);aspect-ratio:1;max-width:520px;width:100%;}
+.hero-img-card img{width:100%;height:100%;object-fit:cover;}
+.hero-float{position:absolute;background:var(--card);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:10px;white-space:nowrap;border:1px solid var(--border);}
+.hf1{bottom:32px;left:-20px;}
+.hf2{top:28px;right:-8px;}
+.hf-ico{width:36px;height:36px;border-radius:10px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.hf-t strong{display:block;font-size:13px;font-weight:800;color:var(--text);}
+.hf-t span{font-size:11px;color:var(--text3);font-weight:600;}
+
+/* ───────────────────────────────────────────
+   MARKETING STATS
+─────────────────────────────────────────── */
+#mkt-bar{background:var(--navy);padding:0;}
+.mkt-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.mkt-item{padding:28px 24px;border-right:1px solid rgba(255,255,255,.1);text-align:center;}
+.mkt-item:last-child{border-right:none;}
+.mkt-num{font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1;}
+.mkt-lbl{font-size:12px;font-weight:600;color:rgba(255,255,255,.55);margin-top:4px;letter-spacing:.3px;}
+.mkt-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;}
+
+/* ───────────────────────────────────────────
+   SECTION
+─────────────────────────────────────────── */
+.sec{padding:72px 24px;}
+.sec-inner{max-width:1440px;margin:0 auto;}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px;}
+.sec-head h2{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-1px;color:var(--navy);}
+.sec-head-link{font-size:13px;font-weight:700;color:var(--blue);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;}
+
+/* ───────────────────────────────────────────
+   CATEGORY TILES
+─────────────────────────────────────────── */
+.cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px;}
+.cat-tile{background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);padding:18px 10px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;border:none;transition:all .2s;font-family:'Manrope',sans-serif;}
+.cat-tile:hover{background:var(--card);box-shadow:var(--shadow-md);transform:translateY(-3px);border:1.5px solid var(--blue);}
+.cat-ico{width:48px;height:48px;border-radius:14px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:22px;transition:background .2s;}
+.cat-tile:hover .cat-ico{background:var(--blue-l);}
+.cat-lbl{font-size:11px;font-weight:800;color:var(--text);text-align:center;}
+
+/* ───────────────────────────────────────────
+   PRODUCT CARD
+─────────────────────────────────────────── */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s,border-color .25s;}
+.pcard:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:rgba(26,86,219,.25);}
+.pcard-img-wrap{overflow:hidden;position:relative;aspect-ratio:1;background:var(--bg2);}
+.pcard-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.pcard:hover .pcard-img{transform:scale(1.05);}
+.pcard-wish{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);border:none;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:all .15s;backdrop-filter:blur(4px);}
+.pcard-wish:hover,.pcard-wish.active{background:var(--red);color:#fff;}
+.pcard-wish.active{color:#fff;}
+[data-theme="dark"] .pcard-wish{background:rgba(17,24,39,.9);}
+.pcard-body{padding:14px;display:flex;flex-direction:column;gap:9px;flex:1;}
+.pcard-top{display:flex;justify-content:space-between;align-items:center;}
+.badge{border-radius:7px;font-size:10px;font-weight:800;padding:3px 9px;letter-spacing:.3px;}
+.badge-new{background:var(--navy);color:#fff;}
+.badge-used{background:var(--bg3);color:var(--text2);}
+.badge-sealed{background:linear-gradient(135deg,var(--blue),var(--navy));color:#fff;}
+.pcard-cat{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.3px;}
+.pcard-name{font-size:13px;font-weight:700;color:var(--text);line-height:1.4;flex:1;}
+.pcard-price{font-size:19px;font-weight:900;color:var(--navy);letter-spacing:-.5px;}
+.pcard-actions{display:grid;grid-template-columns:1fr auto;gap:8px;}
+.pcard-buy{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--bg2);color:var(--text);font-size:12px;font-weight:700;padding:9px;border-radius:8px;border:none;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .2s;}
+.pcard-buy:hover{background:var(--navy);color:#fff;}
+.pcard-cart{width:38px;height:38px;border-radius:8px;background:var(--blue);color:#fff;border:none;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:all .15s;flex-shrink:0;}
+.pcard-cart:hover{background:var(--navy);transform:scale(1.05);}
+.pcard-cart.added{background:var(--green);}
+
+/* ───────────────────────────────────────────
+   CATALOG LAYOUT
+─────────────────────────────────────────── */
+.catalog-wrap{max-width:1440px;margin:0 auto;padding:32px 24px 80px;display:grid;grid-template-columns:256px 1fr;gap:32px;align-items:start;}
+/* Sidebar */
+.sidebar{position:sticky;top:calc(var(--nav-h)+16px);background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:24px;}
+.sb-title{font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.sb-list{display:flex;flex-direction:column;gap:2px;}
+.sb-btn{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:700;color:var(--text2);border:none;background:none;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;width:100%;transition:all .15s;}
+.sb-btn:hover{background:var(--bg2);color:var(--text);}
+.sb-btn.active{background:var(--blue-l);color:var(--blue);}
+.sb-cnt{font-size:10px;font-weight:700;background:var(--bg3);color:var(--text3);padding:2px 7px;border-radius:99px;}
+.sb-btn.active .sb-cnt{background:rgba(26,86,219,.15);color:var(--blue);}
+.sb-reset{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:9px;border-radius:8px;font-size:12px;font-weight:700;color:var(--text3);border:1.5px solid var(--border);background:none;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .2s;}
+.sb-reset:hover{border-color:var(--blue);color:var(--blue);}
+.price-range{display:flex;flex-direction:column;gap:10px;}
+.price-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.price-inp{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;font-weight:600;color:var(--text);font-family:'Manrope',sans-serif;width:100%;outline:none;}
+.price-inp:focus{border-color:var(--blue);}
+
+/* Catalog main */
+.cat-main{display:flex;flex-direction:column;gap:18px;}
+.cat-topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.cat-topbar h1{font-size:26px;font-weight:900;letter-spacing:-1px;color:var(--navy);margin-right:auto;}
+#cat-count{font-size:13px;font-weight:600;color:var(--text3);}
+.sort-select{background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text);font-family:'Manrope',sans-serif;cursor:pointer;outline:none;}
+
+/* Mobile filter chips */
+.mob-chips{display:none;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.mob-chips::-webkit-scrollbar{display:none;}
+.mchip{flex-shrink:0;background:var(--card);border:1.5px solid var(--border);color:var(--text2);border-radius:99px;padding:7px 15px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;white-space:nowrap;transition:all .15s;}
+.mchip.active,.mchip:hover{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+/* Empty */
+.empty-state{text-align:center;padding:80px 20px;}
+.empty-state h3{font-size:20px;font-weight:900;color:var(--navy);margin:16px 0 10px;}
+.empty-state p{color:var(--text2);margin-bottom:24px;}
+
+/* ───────────────────────────────────────────
+   PRODUCT DETAIL
+─────────────────────────────────────────── */
+.detail-wrap{max-width:1200px;margin:0 auto;padding:36px 24px 80px;}
+.back-btn{display:inline-flex;align-items:center;gap:7px;background:var(--bg2);border:1.5px solid var(--border);color:var(--text2);font-size:13px;font-weight:700;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:'Manrope',sans-serif;margin-bottom:36px;transition:all .2s;}
+.back-btn:hover{border-color:var(--blue);color:var(--blue);}
+.detail-layout{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.detail-gallery{display:flex;flex-direction:column;gap:10px;}
+.detail-main-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:20px;border:1px solid var(--border);background:var(--bg2);}
+.detail-thumbs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;}
+.detail-thumbs::-webkit-scrollbar{display:none;}
+.det-thumb{width:64px;height:64px;flex-shrink:0;border-radius:10px;border:2px solid var(--border);cursor:pointer;object-fit:cover;background:var(--bg2);transition:border-color .15s;}
+.det-thumb.active,.det-thumb:hover{border-color:var(--blue);}
+/* Upload zone in detail */
+.det-upload{border:2px dashed var(--border);border-radius:12px;padding:18px;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:var(--bg2);margin-top:6px;}
+.det-upload:hover,.det-upload.drag{border-color:var(--blue);background:var(--blue-ll);}
+.det-upload input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.det-upload-txt{font-size:12px;font-weight:600;color:var(--text3);}
+
+.detail-info{display:flex;flex-direction:column;gap:18px;}
+.detail-tag{display:inline-flex;background:var(--blue-l);color:var(--blue);font-size:11px;font-weight:800;letter-spacing:.5px;border-radius:99px;padding:5px 14px;text-transform:uppercase;width:fit-content;}
+.detail-name{font-size:clamp(20px,3vw,28px);font-weight:900;line-height:1.15;letter-spacing:-.5px;color:var(--navy);}
+.detail-price{font-size:36px;font-weight:900;color:var(--navy);letter-spacing:-1px;line-height:1;}
+.detail-actions{display:grid;grid-template-columns:1fr auto auto;gap:10px;}
+.det-buy{flex:1;padding:15px;font-size:14px;border-radius:var(--r-sm);}
+.det-wish-btn{width:48px;height:48px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:var(--bg2);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.det-wish-btn:hover,.det-wish-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+.det-cart-btn{width:48px;height:48px;border-radius:var(--r-sm);background:var(--blue);color:#fff;border:none;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.det-cart-btn:hover{background:var(--navy);}
+.det-cart-btn.added{background:var(--green);}
+
+.specs-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.specs-box h4{padding:14px 18px;font-size:12px;font-weight:800;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid var(--border);}
+.spec-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--border);}
+.spec-row:last-child{border-bottom:none;}
+.sk{font-size:13px;color:var(--text2);}
+.sv{font-size:13px;font-weight:700;color:var(--text);text-align:right;max-width:55%;}
+.detail-desc{font-size:13px;line-height:1.7;color:var(--text2);background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;}
+.detail-note{font-size:12px;color:var(--text3);line-height:1.6;text-align:center;}
+
+/* ───────────────────────────────────────────
+   CART DRAWER
+─────────────────────────────────────────── */
+#cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:800;backdrop-filter:blur(2px);}
+#cart-overlay.open{display:block;}
+#cart-drawer{
+  position:fixed;top:0;right:-110%;width:min(420px,95vw);height:100vh;
+  background:var(--card);border-left:1px solid var(--border);
+  z-index:900;transition:right .3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+}
+#cart-drawer.open{right:0;}
+.cart-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-head h3{font-size:18px;font-weight:900;color:var(--navy);}
+.cart-close{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;width:36px;height:36px;font-size:18px;color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.cart-body{flex:1;overflow-y:auto;padding:16px 24px;}
+.cart-item{display:grid;grid-template-columns:72px 1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);align-items:center;}
+.cart-item:last-child{border-bottom:none;}
+.cart-item-img{width:72px;height:72px;border-radius:10px;object-fit:cover;border:1px solid var(--border);background:var(--bg2);}
+.cart-item-name{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:4px;}
+.cart-item-price{font-size:14px;font-weight:900;color:var(--blue);}
+.cart-qty{display:flex;align-items:center;gap:8px;}
+.qty-btn{width:28px;height:28px;border-radius:6px;background:var(--bg2);border:1.5px solid var(--border);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;color:var(--text);transition:all .15s;}
+.qty-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.qty-val{font-size:14px;font-weight:800;min-width:20px;text-align:center;}
+.cart-del{background:none;border:none;font-size:18px;color:var(--text3);cursor:pointer;padding:4px;transition:color .15s;}
+.cart-del:hover{color:var(--red);}
+.cart-empty{text-align:center;padding:60px 0;color:var(--text3);}
+.cart-empty div{font-size:48px;margin-bottom:12px;}
+.cart-empty p{font-weight:600;font-size:14px;}
+.cart-footer{padding:20px 24px;border-top:1px solid var(--border);background:var(--card);}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.cart-total-lbl{font-size:14px;color:var(--text2);font-weight:600;}
+.cart-total-val{font-size:22px;font-weight:900;color:var(--navy);}
+.cart-tg-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;padding:15px;border-radius:var(--r-sm);border:none;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:10px;}
+.cart-tg-btn:hover{background:var(--blue);}
+.cart-hint{font-size:11px;color:var(--text3);text-align:center;line-height:1.6;}
+
+/* ───────────────────────────────────────────
+   WISHLIST PAGE
+─────────────────────────────────────────── */
+.wish-wrap{max-width:1440px;margin:0 auto;padding:40px 24px 80px;}
+.wish-head{margin-bottom:32px;}
+.wish-head h1{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--navy);}
+.wish-head p{color:var(--text2);margin-top:6px;}
+
+/* ───────────────────────────────────────────
+   SETTINGS PAGE
+─────────────────────────────────────────── */
+.settings-wrap{max-width:720px;margin:0 auto;padding:40px 24px 80px;}
+.settings-wrap h1{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--navy);margin-bottom:32px;}
+.setting-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:16px;overflow:hidden;}
+.setting-card-head{padding:18px 20px 0;}
+.setting-card-head h3{font-size:13px;font-weight:800;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);}
+.setting-row:last-child{border-bottom:none;}
+.sr-left h4{font-size:14px;font-weight:700;color:var(--text);}
+.sr-left p{font-size:12px;color:var(--text3);margin-top:2px;}
+/* Toggle */
+.toggle{position:relative;width:46px;height:26px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-track{position:absolute;inset:0;background:var(--bg3);border-radius:99px;cursor:pointer;transition:background .2s;}
+.toggle-track::after{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.toggle input:checked+.toggle-track{background:var(--blue);}
+.toggle input:checked+.toggle-track::after{transform:translateX(20px);}
+/* Radio group */
+.radio-group{display:flex;gap:8px;flex-wrap:wrap;}
+.radio-opt{display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;font-size:13px;font-weight:700;color:var(--text2);background:var(--bg2);transition:all .15s;}
+.radio-opt:hover{border-color:var(--blue);color:var(--blue);}
+.radio-opt.active{border-color:var(--blue);color:var(--blue);background:var(--blue-l);}
+.radio-opt input{display:none;}
+/* Color accent picker */
+.color-swatches{display:flex;gap:8px;}
+.swatch{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;}
+.swatch.active{border-color:var(--text);transform:scale(1.1);}
+.font-size-btns{display:flex;gap:8px;}
+.fsz{padding:7px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg2);font-family:'Manrope',sans-serif;font-weight:700;color:var(--text2);cursor:pointer;transition:all .15s;}
+.fsz.active{border-color:var(--blue);color:var(--blue);background:var(--blue-l);}
+
+/* ───────────────────────────────────────────
+   ADMIN PAGE
+─────────────────────────────────────────── */
+.admin-wrap{max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+.admin-wrap h1{font-size:26px;font-weight:900;letter-spacing:-1px;color:var(--navy);margin-bottom:28px;}
+.admin-tabs{display:flex;gap:4px;background:var(--bg2);border-radius:var(--r-sm);padding:4px;margin-bottom:28px;width:fit-content;}
+.atab{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;color:var(--text2);border:none;background:none;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .15s;}
+.atab.active{background:var(--card);color:var(--navy);box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:20px;}
+.acard h3{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:18px;}
+.form-g{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-full{grid-column:1/-1;}
+.flabel{font-size:11px;font-weight:800;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:5px;}
+.finput,.fselect,.ftextarea{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:10px 13px;font-size:13px;font-weight:600;color:var(--text);font-family:'Manrope',sans-serif;width:100%;outline:none;transition:border-color .15s;}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--blue);}
+.fselect{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
+.ftextarea{resize:vertical;min-height:80px;}
+.upload-zone{border:2px dashed var(--border);border-radius:var(--r);padding:28px;text-align:center;cursor:pointer;position:relative;background:var(--bg2);transition:all .2s;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--blue);background:var(--blue-ll);}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.up-ico{font-size:32px;margin-bottom:8px;}
+.up-txt{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.up-sub{font-size:11px;color:var(--text3);}
+.up-previews{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.up-prev{width:72px;height:72px;border-radius:8px;object-fit:cover;border:1.5px solid var(--border);}
+.admin-save{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-size:13px;font-weight:800;padding:12px 28px;border-radius:var(--r-sm);border:none;font-family:'Manrope',sans-serif;cursor:pointer;margin-top:6px;transition:all .2s;}
+.admin-save:hover{background:var(--blue);box-shadow:0 4px 16px rgba(26,86,219,.3);}
+/* Table */
+.atable{width:100%;border-collapse:collapse;}
+.atable th{text-align:left;font-size:10px;font-weight:800;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;border-bottom:1.5px solid var(--border);}
+.atable td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle;}
+.atable tr:last-child td{border-bottom:none;}
+.atable tr:hover td{background:var(--bg2);}
+.atbl-img{width:42px;height:42px;border-radius:8px;object-fit:cover;border:1px solid var(--border);background:var(--bg2);}
+.abtn{padding:5px 11px;border-radius:7px;font-size:11px;font-weight:800;cursor:pointer;font-family:'Manrope',sans-serif;border:1.5px solid var(--border);background:none;color:var(--text2);margin-right:5px;transition:all .15s;}
+.abtn:hover{border-color:var(--blue);color:var(--blue);}
+.abtn-del{border-color:#FECACA;color:var(--red);}
+.abtn-del:hover{background:#FEE2E2;border-color:var(--red);}
+
+/* ───────────────────────────────────────────
+   CTA BANNER
+─────────────────────────────────────────── */
+.cta-banner{background:var(--navy);border-radius:24px;padding:clamp(36px,5vw,60px) clamp(28px,4vw,72px);display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.cta-banner::before{content:'';position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04);}
+.cta-text h2{font-size:clamp(20px,3vw,32px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px;}
+.cta-text p{color:rgba(255,255,255,.6);font-size:14px;max-width:380px;line-height:1.6;}
+.btn-white{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);font-size:14px;font-weight:800;padding:14px 28px;border-radius:var(--r-sm);border:none;flex-shrink:0;text-decoration:none;transition:all .2s;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+
+/* ───────────────────────────────────────────
+   FOOTER
+─────────────────────────────────────────── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 24px;}
+.foot-inner{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:28px;}
+.foot-brand h3{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:6px;}
+.foot-brand p{font-size:13px;color:var(--text2);}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+.foot-link{font-size:13px;font-weight:600;color:var(--text2);transition:color .15s;}
+.foot-link:hover{color:var(--blue);}
+.foot-copy{font-size:12px;color:var(--text3);}
+
+/* ───────────────────────────────────────────
+   FLOAT TG
+─────────────────────────────────────────── */
+#float-tg{position:fixed;bottom:24px;right:24px;z-index:700;width:54px;height:54px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(13,43,94,.35);transition:all .2s;text-decoration:none;}
+#float-tg:hover{background:var(--blue);transform:scale(1.08);}
+
+/* ───────────────────────────────────────────
+   TOAST
+─────────────────────────────────────────── */
+#toast{position:fixed;bottom:88px;right:24px;z-index:1000;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:12px 18px;border-radius:var(--r-sm);box-shadow:var(--shadow-md);opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;}
+#toast.show{opacity:1;transform:translateY(0);}
+
+/* ───────────────────────────────────────────
+   RESPONSIVE
+─────────────────────────────────────────── */
+@media(max-width:1100px){
+  .catalog-wrap{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .mob-chips{display:flex;}
+}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-visual{display:none;}
+  .detail-layout{grid-template-columns:1fr;}
+  .mkt-inner{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:680px){
+  .nav-link,.nav-phone-wrap,.btn-nav-tg{display:none!important;}
+  #burger{display:flex;}
+  .detail-actions{grid-template-columns:1fr auto auto;}
+  .form-g{grid-template-columns:1fr;}
+  .mkt-inner{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  .catalog-wrap,.wish-wrap,.settings-wrap,.admin-wrap,.detail-wrap{padding-left:14px;padding-right:14px;}
+  .hero-inner{padding:50px 14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <!-- Logo -->
+    <button class="logo-wrap" onclick="showPage('home')" aria-label="На главную">
+      <svg class="logo-svg" viewBox="0 0 170 36" fill="none">
+        <path d="M2 2L14 2L22 26L30 2L42 2L24 34H20L2 2Z" fill="#0D2B5E"/>
+        <path d="M38 34L50 2H62L74 34H62L58 22H54L50 34H38Z M52 16H60L56 6Z" fill="#0D2B5E"/>
+        <path d="M77 2H91V34H77V2Z M91 2L106 22V2H120V34H106L91 14V34H77" fill="#0D2B5E" opacity="0"/>
+        <path d="M77 2H91V34H77V2Z" fill="#0D2B5E"/>
+        <path d="M91 2H104L118 26V2H132V34H118L105 10V34H91V2Z" fill="#0D2B5E"/>
+        <path d="M135 2H163V10H149V28H163V36H135V28H149V10H135V2Z" fill="#0D2B5E" opacity="0"/>
+        <path d="M135 2H165V10L147 26H165V34H135V26L153 10H135V2Z" fill="#0D2B5E"/>
+        <text x="128" y="33" font-family="Manrope" font-size="8" font-weight="500" fill="#94A3B8" letter-spacing="2">store</text>
+      </svg>
+    </button>
+
+    <div style="display:flex;align-items:center;gap:2px;">
+      <button class="nav-link active" id="nl-home" onclick="showPage('home')">Главная</button>
+      <button class="nav-link" id="nl-catalog" onclick="showPage('catalog')">Каталог</button>
+      <button class="nav-link" id="nl-wish" onclick="showPage('wish')">Избранное</button>
+      <button class="nav-link" id="nl-admin" onclick="showPage('admin')">Управление</button>
+    </div>
+
+    <div class="nav-spacer"></div>
+
+    <div class="nav-phone-wrap" style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.46 2 2 0 0 1 3.55 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.75a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:+79811607398" style="color:inherit;">+7 (981) 160-73-98</a>
+    </div>
+
+    <!-- Wishlist -->
+    <button class="nav-icon" onclick="showPage('wish')" aria-label="Избранное">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="nav-badge" id="wish-badge">0</span>
+    </button>
+
+    <!-- Cart -->
+    <button class="nav-icon" onclick="openCart()" aria-label="Корзина">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="nav-badge" id="cart-badge">0</span>
+    </button>
+
+    <!-- Settings -->
+    <button class="nav-icon" onclick="showPage('settings')" aria-label="Настройки">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+
+    <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="btn-nav-tg">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 8.26-2.04 9.6c-.14.66-.54.82-1.08.51l-3-2.2-1.45 1.39c-.16.16-.3.3-.6.3l.21-3.06 5.56-5.02c.24-.21-.05-.33-.37-.12L7.2 14.45l-2.96-.92c-.64-.2-.66-.64.14-.95l11.53-4.45c.54-.2 1.01.13.61.13z"/></svg>
+      Написать
+    </a>
+
+    <button id="burger" onclick="openMob()" aria-label="Меню">
+      <span></span><span></span><span style="width:11px;"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div id="mob-overlay" onclick="closeMob()"></div>
+<div id="mob-drawer">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <button class="mob-navlink" onclick="showPage('home');closeMob()">🏠 Главная</button>
+  <button class="mob-navlink" onclick="showPage('catalog');closeMob()">📦 Каталог</button>
+  <button class="mob-navlink" onclick="showPage('wish');closeMob()">❤️ Избранное</button>
+  <button class="mob-navlink" onclick="openCart();closeMob()">🛒 Корзина</button>
+  <button class="mob-navlink" onclick="showPage('settings');closeMob()">⚙️ Настройки</button>
+  <button class="mob-navlink" onclick="showPage('admin');closeMob()">🛠 Управление</button>
+  <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="btn-nav-tg" style="margin-top:auto;justify-content:center;">Написать в Telegram</a>
+</div>
+
+<!-- Cart Drawer -->
+<div id="cart-overlay" onclick="closeCart()"></div>
+<div id="cart-drawer">
+  <div class="cart-head">
+    <h3>🛒 Корзина</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none;">
+    <div class="cart-total-row">
+      <span class="cart-total-lbl">Итого</span>
+      <span class="cart-total-val" id="cart-total">0 ₽</span>
+    </div>
+    <a id="cart-tg-link" href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="cart-tg-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 8.26-2.04 9.6c-.14.66-.54.82-1.08.51l-3-2.2-1.45 1.39c-.16.16-.3.3-.6.3l.21-3.06 5.56-5.02c.24-.21-.05-.33-.37-.12L7.2 14.45l-2.96-.92c-.64-.2-.66-.64.14-.95l11.53-4.45c.54-.2 1.01.13.61.13z"/></svg>
+      Оформить через Telegram
+    </a>
+    <p class="cart-hint">Мы свяжемся с вами в Telegram и подтвердим заказ</p>
+  </div>
+</div>
+
+<!-- ═══ PAGE: HOME ═══ -->
+<div id="page-home" class="page active">
+  <section id="hero">
+    <div class="hero-bg-dot" style="width:700px;height:700px;top:-200px;right:-100px;"></div>
+    <div class="hero-bg-dot" style="width:400px;height:400px;bottom:-100px;left:-80px;opacity:.6;"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-pill"><span class="hero-pill-dot"></span>Санкт-Петербург · Оригинальная техника</div>
+        <h1 class="hero-h1">Техника<br/>которой<br/><em>доверяют</em></h1>
+        <p class="hero-sub">Apple, Samsung, Dyson — новые и б/у устройства по лучшим ценам. Сотни довольных клиентов. Быстрое оформление через Telegram.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="showPage('catalog')">Смотреть каталог</button>
+          <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Telegram-канал</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item"><span class="trust-icon">✅</span>Оригинальные товары</div>
+          <div class="trust-item"><span class="trust-icon">🛡️</span>Гарантия</div>
+          <div class="trust-item"><span class="trust-icon">⚡</span>Быстро</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img-card"><img src="https://picsum.photos/seed/vanza-hero2/800/800" alt="VANZA STORE техника" loading="eager"/></div>
+        <div class="hero-float hf1"><div class="hf-ico">📱</div><div class="hf-t"><strong>iPhone 16 Pro</strong><span>от 82 490 ₽</span></div></div>
+        <div class="hero-float hf2"><div class="hf-ico">⭐</div><div class="hf-t"><strong>Топ продаж</strong><span>Месяц</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETING STATS -->
+  <div id="mkt-bar">
+    <div class="mkt-inner">
+      <div class="mkt-item">
+        <div class="mkt-num">86+</div>
+        <div class="mkt-lbl">Товаров в каталоге</div>
+        <div class="mkt-sub">Пополняется ежедневно</div>
+      </div>
+      <div class="mkt-item">
+        <div class="mkt-num">280</div>
+        <div class="mkt-lbl">Подписчиков в TG</div>
+        <div class="mkt-sub">Реальные покупатели</div>
+      </div>
+      <div class="mkt-item">
+        <div class="mkt-num">0</div>
+        <div class="mkt-lbl">Нареканий</div>
+        <div class="mkt-sub">100% оригиналы, без подделок</div>
+      </div>
+      <div class="mkt-item">
+        <div class="mkt-num">1 день</div>
+        <div class="mkt-lbl">Средний срок сделки</div>
+        <div class="mkt-sub">Написал → получил</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY US -->
+  <div class="sec" style="background:var(--bg2);">
+    <div class="sec-inner">
+      <div class="sec-head"><h2>Почему выбирают VANZA</h2></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;">
+          <div style="font-size:32px;margin-bottom:12px;">💎</div>
+          <h3 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px;">100% оригинал</h3>
+          <p style="font-size:13px;color:var(--text2);line-height:1.6;">Только сертифицированные устройства без подделок и «серых» схем.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;">
+          <div style="font-size:32px;margin-bottom:12px;">📉</div>
+          <h3 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px;">Цены ниже рынка</h3>
+          <p style="font-size:13px;color:var(--text2);line-height:1.6;">Работаем напрямую — без лишних наценок. Б/У техника до -60% от новой.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;">
+          <div style="font-size:32px;margin-bottom:12px;">⚡</div>
+          <h3 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px;">Быстрое оформление</h3>
+          <p style="font-size:13px;color:var(--text2);line-height:1.6;">Написал в Telegram → уточнили детали → забрал. Без очередей и волокиты.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;">
+          <div style="font-size:32px;margin-bottom:12px;">🛡️</div>
+          <h3 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px;">Гарантия и обмен</h3>
+          <p style="font-size:13px;color:var(--text2);line-height:1.6;">Гарантия на все новые устройства. Обмен б/у в течение 14 дней.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="sec">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <h2>Категории</h2>
+        <button class="sec-head-link" onclick="showPage('catalog')">Весь каталог →</button>
+      </div>
+      <div class="cats-grid" id="cats-home"></div>
+    </div>
+  </div>
+
+  <!-- FEATURED USED -->
+  <div class="sec" style="background:var(--bg2);">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <h2>Б/У в отличном состоянии</h2>
+        <button class="sec-head-link" onclick="showPage('catalog');setTimeout(()=>setCond('Б/У'),60)">Смотреть все →</button>
+      </div>
+      <div class="prod-grid" id="featured-grid"></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="sec">
+    <div class="sec-inner">
+      <div class="cta-banner">
+        <div class="cta-text">
+          <h2>Свежие поступления каждый день</h2>
+          <p>Подпишитесь на Telegram-канал — первыми узнавайте о новинках и лучших ценах.</p>
+        </div>
+        <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="btn-white">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#0D2B5E"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 8.26-2.04 9.6c-.14.66-.54.82-1.08.51l-3-2.2-1.45 1.39c-.16.16-.3.3-.6.3l.21-3.06 5.56-5.02c.24-.21-.05-.33-.37-.12L7.2 14.45l-2.96-.92c-.64-.2-.66-.64.14-.95l11.53-4.45c.54-.2 1.01.13.61.13z"/></svg>
+          @vanzastore78
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: CATALOG ═══ -->
+<div id="page-catalog" class="page">
+  <div class="catalog-wrap">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div>
+        <div class="sb-title">Категория</div>
+        <div class="sb-list" id="sb-cats"></div>
+      </div>
+      <div>
+        <div class="sb-title">Состояние</div>
+        <div class="sb-list">
+          <button class="sb-btn active" data-sbcond="Все" onclick="setCond('Все')">Все состояния <span class="sb-cnt" id="sc-all"></span></button>
+          <button class="sb-btn" data-sbcond="Новый" onclick="setCond('Новый')">🔵 Новый <span class="sb-cnt" id="sc-new"></span></button>
+          <button class="sb-btn" data-sbcond="Б/У" onclick="setCond('Б/У')">⚪ Б/У <span class="sb-cnt" id="sc-used"></span></button>
+        </div>
+      </div>
+      <div>
+        <div class="sb-title">Цена</div>
+        <div class="price-range">
+          <div class="price-inputs">
+            <input class="price-inp" id="price-min" type="number" placeholder="От" min="0" oninput="applyFilters()"/>
+            <input class="price-inp" id="price-max" type="number" placeholder="До" min="0" oninput="applyFilters()"/>
+          </div>
+        </div>
+      </div>
+      <button class="sb-reset" onclick="resetFilters()">↺ Сбросить фильтры</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="cat-main">
+      <!-- Mobile chips -->
+      <div class="mob-chips" id="mob-chips">
+        <button class="mchip active" data-mcat="Все" onclick="setCat('Все')">Все</button>
+        <button class="mchip" data-mcat="iPhone" onclick="setCat('iPhone')">iPhone</button>
+        <button class="mchip" data-mcat="Apple Watch" onclick="setCat('Apple Watch')">Watch</button>
+        <button class="mchip" data-mcat="AirPods" onclick="setCat('AirPods')">AirPods</button>
+        <button class="mchip" data-mcat="MacBook" onclick="setCat('MacBook')">MacBook</button>
+        <button class="mchip" data-mcat="iPad" onclick="setCat('iPad')">iPad</button>
+        <button class="mchip" data-mcat="Samsung" onclick="setCat('Samsung')">Samsung</button>
+        <button class="mchip" data-mcat="Dyson" onclick="setCat('Dyson')">Dyson</button>
+        <button class="mchip" data-mcat="PlayStation" onclick="setCat('PlayStation')">PS5</button>
+        <button class="mchip" data-mcat="Яндекс Станции" onclick="setCat('Яндекс Станции')">Яндекс</button>
+        <button class="mchip" data-mcat="Аксессуары" onclick="setCat('Аксессуары')">Аксессуары</button>
+        <span style="display:block;width:1px;height:28px;background:var(--border);flex-shrink:0;align-self:center;"></span>
+        <button class="mchip active" data-mcond="Все" onclick="setCond('Все')">Все</button>
+        <button class="mchip" data-mcond="Новый" onclick="setCond('Новый')">Новый</button>
+        <button class="mchip" data-mcond="Б/У" onclick="setCond('Б/У')">Б/У</button>
+      </div>
+
+      <div class="cat-topbar">
+        <h1>Каталог</h1>
+        <span id="cat-count"></span>
+        <select class="sort-select" id="sort-sel" onchange="applyFilters()">
+          <option value="default">По умолчанию</option>
+          <option value="price-asc">Цена: по возрастанию</option>
+          <option value="price-desc">Цена: по убыванию</option>
+          <option value="name">По названию</option>
+          <option value="new-first">Сначала новые</option>
+          <option value="used-first">Сначала б/у</option>
+        </select>
+      </div>
+
+      <div class="prod-grid" id="pgrid"></div>
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <div style="font-size:52px;">🔍</div>
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте сбросить фильтры или посмотрите Telegram-канал</p>
+        <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Открыть Telegram</a>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ═══ PAGE: PRODUCT DETAIL ═══ -->
+<div id="page-product" class="page">
+  <div class="detail-wrap">
+    <button class="back-btn" onclick="showPage('catalog')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Назад
+    </button>
+    <div class="detail-layout" id="detail-layout"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: WISHLIST ═══ -->
+<div id="page-wish" class="page">
+  <div class="wish-wrap">
+    <div class="wish-head">
+      <h1>❤️ Избранное</h1>
+      <p id="wish-sub">Здесь хранятся отложенные товары</p>
+    </div>
+    <div class="prod-grid" id="wish-grid"></div>
+    <div id="wish-empty" style="display:none;" class="empty-state">
+      <div style="font-size:52px;">💔</div>
+      <h3>Список пуст</h3>
+      <p>Нажмите ♡ на карточке товара, чтобы добавить в избранное</p>
+      <button class="btn btn-primary btn-sm" onclick="showPage('catalog')">Перейти в каталог</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: SETTINGS ═══ -->
+<div id="page-settings" class="page">
+  <div class="settings-wrap">
+    <h1>⚙️ Настройки</h1>
+
+    <!-- Appearance -->
+    <div class="setting-card">
+      <div class="setting-card-head"><h3>Внешний вид</h3></div>
+
+      <div class="setting-row">
+        <div class="sr-left">
+          <h4>Тема оформления</h4>
+          <p>Светлая или тёмная тема</p>
+        </div>
+        <div class="radio-group">
+          <label class="radio-opt active" id="theme-light-opt">
+            <input type="radio" name="theme" value="light" checked onchange="setTheme('light')"/>
+            ☀️ Светлая
+          </label>
+          <label class="radio-opt" id="theme-dark-opt">
+            <input type="radio" name="theme" value="dark" onchange="setTheme('dark')"/>
+            🌙 Тёмная
+          </label>
+          <label class="radio-opt" id="theme-auto-opt">
+            <input type="radio" name="theme" value="auto" onchange="setTheme('auto')"/>
+            💻 Авто
+          </label>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <div class="sr-left">
+          <h4>Акцентный цвет</h4>
+          <p>Цвет кнопок и выделений</p>
+        </div>
+        <div class="color-swatches">
+          <div class="swatch active" style="background:#0D2B5E;" data-color="default" onclick="setAccent('default',this)" title="По умолчанию"></div>
+          <div class="swatch" style="background:#1A56DB;" data-color="blue" onclick="setAccent('blue',this)" title="Синий"></div>
+          <div class="swatch" style="background:#0D9488;" data-color="teal" onclick="setAccent('teal',this)" title="Бирюзовый"></div>
+          <div class="swatch" style="background:#7C3AED;" data-color="violet" onclick="setAccent('violet',this)" title="Фиолетовый"></div>
+          <div class="swatch" style="background:#DC2626;" data-color="red" onclick="setAccent('red',this)" title="Красный"></div>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <div class="sr-left">
+          <h4>Размер шрифта</h4>
+          <p>Основной размер текста</p>
+        </div>
+        <div class="font-size-btns">
+          <button class="fsz" onclick="setFontSize(14,this)" style="font-size:12px;">А</button>
+          <button class="fsz active" onclick="setFontSize(16,this)" style="font-size:14px;">А</button>
+          <button class="fsz" onclick="setFontSize(18,this)" style="font-size:16px;">А</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display -->
+    <div class="setting-card">
+      <div class="setting-card-head"><h3>Каталог</h3></div>
+      <div class="setting-row">
+        <div class="sr-left">
+          <h4>Вид каталога</h4>
+          <p>Сетка или список</p>
+        </div>
+        <div class="radio-group">
+          <label class="radio-opt active" id="grid-opt">
+            <input type="radio" name="catview" value="grid" checked onchange="setCatView('grid')"/>
+            ⊞ Сетка
+          </label>
+          <label class="radio-opt" id="list-opt">
+            <input type="radio" name="catview" value="list" onchange="setCatView('list')"/>
+            ☰ Список
+          </label>
+        </div>
+      </div>
+      <div class="setting-row">
+        <div class="sr-left">
+          <h4>Показывать характеристики</h4>
+          <p>Краткие характеристики на карточке</p>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="show-specs-toggle" checked onchange="applyFilters()"/>
+          <div class="toggle-track"></div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="setting-card">
+      <div class="setting-card-head"><h3>Уведомления</h3></div>
+      <div class="setting-row">
+        <div class="sr-left">
+          <h4>Telegram-уведомления</h4>
+          <p>Получать новинки в Telegram</p>
+        </div>
+        <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Подписаться</a>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="setting-card">
+      <div class="setting-card-head"><h3>О магазине</h3></div>
+      <div class="setting-row">
+        <div class="sr-left"><h4>Контакт менеджера</h4></div>
+        <a href="https://t.me/vaaanza" target="_blank" rel="noopener noreferrer" style="font-weight:700;color:var(--blue);">@vaaanza</a>
+      </div>
+      <div class="setting-row">
+        <div class="sr-left"><h4>Телефон</h4></div>
+        <a href="tel:+79811607398" style="font-weight:700;color:var(--blue);">+7 (981) 160-73-98</a>
+      </div>
+      <div class="setting-row">
+        <div class="sr-left"><h4>Telegram-канал</h4></div>
+        <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" style="font-weight:700;color:var(--blue);">@vanzastore78</a>
+      </div>
+      <div class="setting-row">
+        <div class="sr-left"><h4>Город</h4></div>
+        <span style="font-weight:700;">Санкт-Петербург</span>
+      </div>
+      <div class="setting-row">
+        <div class="sr-left"><h4>Версия сайта</h4></div>
+        <span style="color:var(--text3);font-size:12px;">3.0 · VANZA STORE</span>
+      </div>
+      <div class="setting-row">
+        <div class="sr-left"><h4>Сбросить все данные</h4><p>Очистит корзину и избранное</p></div>
+        <button class="btn btn-ghost btn-sm" onclick="resetAll()" style="color:var(--red);border-color:var(--red);">Сбросить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: ADMIN ═══ -->
+<div id="page-admin" class="page">
+  <div class="admin-wrap">
+    <h1>🛠 Управление товарами</h1>
+    <div class="admin-tabs">
+      <button class="atab active" onclick="switchAdminTab('add',this)">＋ Добавить товар</button>
+      <button class="atab" onclick="switchAdminTab('list',this)">📋 Все товары</button>
+    </div>
+
+    <!-- ADD -->
+    <div id="atab-add">
+      <div class="acard">
+        <h3>Новый товар</h3>
+        <div class="form-g">
+          <div class="form-full"><label class="flabel">Название</label><input id="f-name" class="finput" type="text" placeholder="iPhone 16 Pro 256Gb Black Titanium"/></div>
+          <div><label class="flabel">Цена</label><input id="f-price" class="finput" type="text" placeholder="от 82.490₽"/></div>
+          <div><label class="flabel">Категория</label>
+            <select id="f-cat" class="fselect">
+              <option>iPhone</option><option>Apple Watch</option><option>AirPods</option>
+              <option>MacBook</option><option>iPad</option><option>Samsung</option>
+              <option>Dyson</option><option>Яндекс Станции</option><option>PlayStation</option><option>Аксессуары</option>
+            </select>
+          </div>
+          <div><label class="flabel">Состояние</label>
+            <select id="f-cond" class="fselect"><option>Новый</option><option>Б/У</option></select>
+          </div>
+          <div><label class="flabel">Уточнение (напр. Отличное)</label><input id="f-sub" class="finput" type="text" placeholder="Отличное / Запечатанный"/></div>
+          <div><label class="flabel">АКБ (для б/у)</label><input id="f-bat" class="finput" type="text" placeholder="90%"/></div>
+          <div class="form-full"><label class="flabel">Описание / характеристики</label><textarea id="f-desc" class="ftextarea" placeholder="Телефон не вскрывался, без ремонтов. Все функции работают. АКБ 90%. Комплект: телефон и провод."></textarea></div>
+          <div class="form-full">
+            <label class="flabel">Фотографии товара</label>
+            <div class="upload-zone" id="admin-upload-zone">
+              <input type="file" accept="image/*" multiple id="admin-photo-input" onchange="handleAdminPhotos(this)"/>
+              <div class="up-ico">📷</div>
+              <div class="up-txt">Нажмите или перетащите фото</div>
+              <div class="up-sub">JPG, PNG, WEBP · несколько файлов</div>
+              <div class="up-previews" id="admin-previews"></div>
+            </div>
+          </div>
+        </div>
+        <button class="admin-save" onclick="addProduct()">💾 Сохранить товар</button>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div id="atab-list" style="display:none;">
+      <div class="acard" style="padding:0;overflow:hidden;">
+        <table class="atable">
+          <thead><tr><th>Фото</th><th>Название</th><th>Цена</th><th>Категория</th><th>Статус</th><th>Действия</th></tr></thead>
+          <tbody id="admin-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <h3>VANZA STORE</h3>
+      <p>Санкт-Петербург · +7 (981) 160-73-98</p>
+    </div>
+    <div class="foot-links">
+      <button class="foot-link" onclick="showPage('catalog')" style="background:none;border:none;cursor:pointer;font-family:'Manrope',sans-serif;">Каталог</button>
+      <a href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" class="foot-link">@vanzastore78</a>
+      <a href="https://t.me/vaaanza" target="_blank" rel="noopener noreferrer" class="foot-link">@vaaanza</a>
+    </div>
+    <p class="foot-copy">© 2025 VANZA STORE · Цены уточняйте в Telegram</p>
+  </div>
+</footer>
+
+<a id="float-tg" href="https://t.me/vanzastore78" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 8.26-2.04 9.6c-.14.66-.54.82-1.08.51l-3-2.2-1.45 1.39c-.16.16-.3.3-.6.3l.21-3.06 5.56-5.02c.24-.21-.05-.33-.37-.12L7.2 14.45l-2.96-.92c-.64-.2-.66-.64.14-.95l11.53-4.45c.54-.2 1.01.13.61.13z"/></svg>
+</a>
+
+<div id="toast">✓ Готово!</div>
+
+<script>
+// ══════════════════════════════════════════════════
+// PRODUCT CATALOG DATA
+// ══════════════════════════════════════════════════
+const SPECS_DB = {
+  'iPhone':{
+    '16 Pro':['Чип: A18 Pro','Экран: 6.3" Super Retina XDR','Камера: 48+48+12 Мп','5G: Да','Face ID: Да','MagSafe: Да'],
+    '16 Pro Max':['Чип: A18 Pro','Экран: 6.9" Super Retina XDR','Камера: 48+48+12 Мп','5G: Да','Face ID: Да','MagSafe: Да'],
+    '16':['Чип: A18','Экран: 6.1" Super Retina XDR','Камера: 48+12 Мп','5G: Да','Face ID: Да','MagSafe: Да'],
+    '16 Plus':['Чип: A18','Экран: 6.7" Super Retina XDR','Камера: 48+12 Мп','5G: Да','Face ID: Да','MagSafe: Да'],
+    '15 Pro Max':['Чип: A17 Pro','Экран: 6.7" Super Retina XDR','Камера: 48+12+12 Мп','Titanium корпус','Dynamic Island','USB-C 3'],
+    '15 Pro':['Чип: A17 Pro','Экран: 6.1" Super Retina XDR','Камера: 48+12+12 Мп','Titanium корпус','Dynamic Island'],
+    '15':['Чип: A16','Экран: 6.1" Super Retina XDR','Камера: 48+12 Мп','Dynamic Island','USB-C'],
+    '17 Pro Max':['Чип: A19 Pro','Экран: 6.9" ProMotion 120Hz','Камера: 48+48+12 Мп','5G: Да','Face ID: Да','Titanum'],
+  },
+  'MacBook':{
+    'Air 13 M4':['Чип: Apple M4','ОЗУ: от 16 ГБ','Экран: 13.6" Liquid Retina','Акб: до 18 ч','Порты: 2×USB-C','Вес: 1.24 кг'],
+    'Air 15 M4':['Чип: Apple M4','ОЗУ: от 16 ГБ','Экран: 15.3" Liquid Retina','Акб: до 18 ч','Вес: 1.51 кг'],
+    '13 Neo':['Чип: Apple M3','Экран: 13.6" Liquid Retina','ОЗУ: 8/16 ГБ','Вес: 1.24 кг'],
+  },
+  'AirPods':{
+    'Pro 3':['Чип: H2','ANC: Да','Прозрачность: Да','Акб: до 6 ч','Кейс: до 30 ч','IP54'],
+    'Pro 2':['Чип: H2','ANC: Да','Прозрачность: Да','Акб: до 6 ч','Кейс: до 30 ч'],
+    '4 ANC':['ANC: Да','Чип: H2','Акб: до 5 ч','IP54'],
+    '4':['Открытый дизайн','Акб: до 5 ч','Кейс: до 30 ч','USB-C'],
+    'Max 2':['Чип: H2','ANC: Да','Персонализированный звук','USB-C','Акб: до 30 ч'],
+    'Max':['Чип: H1','ANC: Да','Акб: до 20 ч'],
+  },
+  'Apple Watch':{
+    'Ultra 3':['Чип: S10','Экран: 49мм Always-On','Акб: до 72 ч','GPS: Да','Сотовая связь','Titanium'],
+    'Ultra 2':['Чип: S9','Экран: 49мм Always-On','Акб: до 60 ч','GPS: Да','Сотовая связь'],
+    '11':['Чип: S10','Экран: Always-On','Акб: до 36 ч','Тонкий корпус','ЭКГ: Да'],
+    '10':['Чип: S9','Экран: Always-On','Акб: до 36 ч','ЭКГ: Да'],
+    'SE 3':['Чип: S9','Экран: Retina','Акб: до 18 ч'],
+  },
+  'Samsung':{
+    'S26 Ultra':['Чип: Snapdragon 8 Elite 2','Экран: 6.9" Dynamic AMOLED 2X','Камера: 200+50+10+10 Мп','S Pen: Да','RAM: от 12 ГБ','5G: Да'],
+    'S26+':['Чип: Snapdragon 8 Elite 2','Экран: 6.7" Dynamic AMOLED 2X','Камера: 50+12+10 Мп','5G: Да'],
+    'S26':['Чип: Snapdragon 8 Elite 2','Экран: 6.2" Dynamic AMOLED 2X','Камера: 50+12+10 Мп','5G: Да'],
+    'S25 Ultra':['Чип: Snapdragon 8 Elite','Экран: 6.9" Dynamic AMOLED','S Pen: Да','Камера: 200+50+10+10 Мп'],
+    'S25+':['Чип: Snapdragon 8 Elite','Экран: 6.7" Dynamic AMOLED','Камера: 50+12+10 Мп'],
+    'S25':['Чип: Snapdragon 8 Elite','Экран: 6.2" Dynamic AMOLED','Камера: 50+12+10 Мп'],
+    'S25 FE':['Чип: Exynos 2500','Экран: 6.7" AMOLED','Камера: 50+8+10 Мп'],
+  },
+  'Dyson':{
+    'HS09':['Airwrap Coanda 2×','Объём: 1200 Вт','Насадки: 6 шт','Интеллектуальный тепловой контроль','Фиксация укладки холодным воздухом'],
+    'HS08':['Corrale Complete Long','Пластины: туристические + длинные','Беспроводной режим','Ионизация'],
+    'HS05':['Corrale Complete Long','Пластины с контролем температуры','Три режима нагрева'],
+    'HS07':['Corrale','Гибкие пластины','Три режима нагрева','Ионизация'],
+    'HT01':['Airstrait','Мощность: 1600 Вт','Технология Coanda','Влажные или сухие волосы'],
+    'Фен':['Supersonic','Мощность: 1600 Вт','Ионизация','Быстрая сушка'],
+  },
+  'iPad':{
+    'Pro 11 M5':['Чип: Apple M5','Экран: 11" Liquid Retina XDR','Камера: 12 Мп','ProMotion 120Hz','Thunderbolt / USB 4'],
+    'Pro 13 M5':['Чип: Apple M5','Экран: 13" Liquid Retina XDR','ProMotion 120Hz','Thunderbolt / USB 4'],
+    'Air 11 M4':['Чип: Apple M4','Экран: 11" Liquid Retina','USB-C','Apple Pencil Pro'],
+    'Air 13 M4':['Чип: Apple M4','Экран: 13" Liquid Retina','USB-C','Apple Pencil Pro'],
+    'Air 11 M3':['Чип: Apple M3','Экран: 11" Liquid Retina','USB-C'],
+    'Air 13 M3':['Чип: Apple M3','Экран: 13" Liquid Retina','USB-C'],
+    '11':['Чип: A16','Экран: 10.9" Liquid Retina','USB-C','Apple Pencil'],
+  },
+  'PlayStation':{
+    'PS5 Pro':['CPU: AMD Zen 2 × 8','GPU: AMD RDNA 4','ОЗУ: 16 ГБ','4K Ray Tracing','SSD: 2 ТБ','Частота: 60–120 FPS'],
+    'PS5 Slim':['CPU: AMD Zen 2 × 8','GPU: AMD RDNA 2','SSD: 1 ТБ','4K / 120 FPS','USB-C'],
+    'Dualsense':['Адаптивные триггеры','Тактильная отдача','Встроенный микрофон','Акб: до 12 ч','USB-C'],
+  },
+  'Яндекс Станции':{
+    'Макс':['Мощность: 65 Вт','Экран: 10" HD','Алиса: Да','Zigbee / Matter','Dolby Atmos'],
+    '3':['Мощность: 30 Вт','Алиса: Да','Wi-Fi 6','Bluetooth 5.0'],
+    'Миди':['Мощность: 15 Вт','Экран: нет','Алиса: Да','Zigbee'],
+    'Мини 3':['Мощность: 6 Вт','Алиса: Да','Часы','Bluetooth 5.0'],
+    'Лайт 2':['Мощность: 5 Вт','Алиса: Да','Компактная','Wi-Fi'],
+  },
+};
+
+let PRODUCTS = [
+  {id:1,name:'iPhone 16 128Gb',price:'от 57.990₽',raw:57990,cat:'iPhone',cond:'Новый',slug:'iphone16-128',photos:[],bat:'',desc:'',specKey:'16'},
+  {id:2,name:'iPhone 16 256Gb',price:'от 63.490₽',raw:63490,cat:'iPhone',cond:'Новый',slug:'iphone16-256',photos:[],bat:'',desc:'',specKey:'16'},
+  {id:3,name:'iPhone 16 512Gb',price:'от 76.490₽',raw:76490,cat:'iPhone',cond:'Новый',slug:'iphone16-512',photos:[],bat:'',desc:'',specKey:'16'},
+  {id:4,name:'iPhone 16 Plus 128Gb',price:'от 67.990₽',raw:67990,cat:'iPhone',cond:'Новый',slug:'iphone16p-128',photos:[],bat:'',desc:'',specKey:'16 Plus'},
+  {id:5,name:'iPhone 16 Plus 256Gb',price:'от 75.490₽',raw:75490,cat:'iPhone',cond:'Новый',slug:'iphone16p-256',photos:[],bat:'',desc:'',specKey:'16 Plus'},
+  {id:6,name:'iPhone 16 Plus 512Gb',price:'от 86.490₽',raw:86490,cat:'iPhone',cond:'Новый',slug:'iphone16p-512',photos:[],bat:'',desc:'',specKey:'16 Plus'},
+  {id:7,name:'iPhone 16 Pro 128Gb',price:'от 82.490₽',raw:82490,cat:'iPhone',cond:'Новый',slug:'iphone16pro-128',photos:[],bat:'',desc:'',specKey:'16 Pro'},
+  {id:8,name:'iPhone 16 Pro 256Gb',price:'от 105.490₽',raw:105490,cat:'iPhone',cond:'Новый',slug:'iphone16pro-256',photos:[],bat:'',desc:'',specKey:'16 Pro'},
+  {id:9,name:'iPhone 16 Pro 512Gb',price:'от 110.990₽',raw:110990,cat:'iPhone',cond:'Новый',slug:'iphone16pro-512',photos:[],bat:'',desc:'',specKey:'16 Pro'},
+  {id:10,name:'iPhone 16 Pro 1Tb',price:'от 115.490₽',raw:115490,cat:'iPhone',cond:'Новый',slug:'iphone16pro-1tb',photos:[],bat:'',desc:'',specKey:'16 Pro'},
+  {id:11,name:'iPhone 16 Pro Max 256Gb',price:'от 96.490₽',raw:96490,cat:'iPhone',cond:'Новый',slug:'iphone16pm-256',photos:[],bat:'',desc:'',specKey:'16 Pro Max'},
+  {id:12,name:'iPhone 16 Pro Max 512Gb',price:'от 114.990₽',raw:114990,cat:'iPhone',cond:'Новый',slug:'iphone16pm-512',photos:[],bat:'',desc:'',specKey:'16 Pro Max'},
+  {id:13,name:'iPhone 16 Pro Max 1Tb',price:'от 133.490₽',raw:133490,cat:'iPhone',cond:'Новый',slug:'iphone16pm-1tb',photos:[],bat:'',desc:'',specKey:'16 Pro Max'},
+  {id:14,name:'iPhone 15 128Gb',price:'от 46.490₽',raw:46490,cat:'iPhone',cond:'Новый',slug:'iphone15-128',photos:[],bat:'',desc:'',specKey:'15'},
+  {id:15,name:'iPhone 15 256Gb',price:'от 55.190₽',raw:55190,cat:'iPhone',cond:'Новый',slug:'iphone15-256',photos:[],bat:'',desc:'',specKey:'15'},
+  {id:16,name:'iPhone 15 Plus 128Gb',price:'от 53.490₽',raw:53490,cat:'iPhone',cond:'Новый',slug:'iphone15p-128',photos:[],bat:'',desc:'',specKey:'15'},
+  {id:17,name:'iPhone 15 Plus 256Gb',price:'от 65.990₽',raw:65990,cat:'iPhone',cond:'Новый',slug:'iphone15p-256',photos:[],bat:'',desc:'',specKey:'15'},
+  {id:18,name:'iPhone 15 Pro 128Gb',price:'от 69.490₽',raw:69490,cat:'iPhone',cond:'Новый',slug:'iphone15pro-128',photos:[],bat:'',desc:'',specKey:'15 Pro'},
+  {id:19,name:'iPhone 15 Pro 256Gb',price:'от 81.990₽',raw:81990,cat:'iPhone',cond:'Новый',slug:'iphone15pro-256',photos:[],bat:'',desc:'',specKey:'15 Pro'},
+  {id:20,name:'iPhone 15 Pro Max 256Gb',price:'от 83.490₽',raw:83490,cat:'iPhone',cond:'Новый',slug:'iphone15pm-256',photos:[],bat:'',desc:'',specKey:'15 Pro Max'},
+  {id:21,name:'iPhone 15 Pro Max 512Gb',price:'от 95.990₽',raw:95990,cat:'iPhone',cond:'Новый',slug:'iphone15pm-512',photos:[],bat:'',desc:'',specKey:'15 Pro Max'},
+  {id:22,name:'iPhone 14 128Gb',price:'от 41.990₽',raw:41990,cat:'iPhone',cond:'Новый',slug:'iphone14-128',photos:[],bat:'',desc:''},
+  {id:23,name:'iPhone 14 256Gb',price:'от 47.490₽',raw:47490,cat:'iPhone',cond:'Новый',slug:'iphone14-256',photos:[],bat:'',desc:''},
+  {id:24,name:'iPhone 13 128Gb',price:'от 41.490₽',raw:41490,cat:'iPhone',cond:'Новый',slug:'iphone13-128',photos:[],bat:'',desc:''},
+  {id:25,name:'iPhone 17 Pro Max 256Gb Cosmic Orange eSim',price:'92.000₽',raw:92000,cat:'iPhone',cond:'Б/У',sub:'Отличное',slug:'iphone17pm-orange',photos:[],bat:'95%',desc:'Телефон не вскрывался, без ремонтов. Все функции работают. Комплект полный.',specKey:'17 Pro Max'},
+  {id:26,name:'iPhone 15 Pro 256Gb Black Titanium',price:'51.000₽',raw:51000,cat:'iPhone',cond:'Б/У',sub:'Отличное',slug:'iphone15pro-blk',photos:[],bat:'92%',desc:'Без ремонтов. Состояние отличное. АКБ 92%.',specKey:'15 Pro'},
+  {id:27,name:'iPhone 16 Pro 128Gb Black',price:'53.000₽',raw:53000,cat:'iPhone',cond:'Б/У',sub:'Хорошее',slug:'iphone16pro-blk',photos:[],bat:'90%',desc:'Телефон не вскрывался, без ремонтов. Все функции работают. АКБ 90%. Комплект: телефон и провод.',specKey:'16 Pro'},
+  {id:28,name:'iPhone 14 Pro Max 128Gb Black',price:'36.000₽',raw:36000,cat:'iPhone',cond:'Б/У',sub:'Отличное',slug:'iphone14pm-blk',photos:[],bat:'88%',desc:'Состояние отличное. Комплект полный.',},
+  {id:29,name:'iPhone 17 Pro Max 256Gb Silver Sim+eSim',price:'115.000₽',raw:115000,cat:'iPhone',cond:'Новый',sub:'Запечатанный',slug:'iphone17pm-slv',photos:[],bat:'',desc:'',specKey:'17 Pro Max'},
+  {id:30,name:'AirPods Pro 2',price:'16.990₽',raw:16990,cat:'AirPods',cond:'Новый',slug:'airpods-pro2',photos:[],bat:'',desc:'',specKey:'Pro 2'},
+  {id:31,name:'AirPods Pro 3',price:'20.490₽',raw:20490,cat:'AirPods',cond:'Новый',slug:'airpods-pro3',photos:[],bat:'',desc:'',specKey:'Pro 3'},
+  {id:32,name:'AirPods 4',price:'11.490₽',raw:11490,cat:'AirPods',cond:'Новый',slug:'airpods-4',photos:[],bat:'',desc:'',specKey:'4'},
+  {id:33,name:'AirPods 4 ANC',price:'14.490₽',raw:14490,cat:'AirPods',cond:'Новый',slug:'airpods-4anc',photos:[],bat:'',desc:'',specKey:'4 ANC'},
+  {id:34,name:'AirPods Max',price:'от 39.490₽',raw:39490,cat:'AirPods',cond:'Новый',slug:'airpods-max',photos:[],bat:'',desc:'',specKey:'Max'},
+  {id:35,name:'AirPods Max 2',price:'от 42.990₽',raw:42990,cat:'AirPods',cond:'Новый',slug:'airpods-max2',photos:[],bat:'',desc:'',specKey:'Max 2'},
+  {id:36,name:'Apple Watch SE 3 40mm',price:'от 21.490₽',raw:21490,cat:'Apple Watch',cond:'Новый',slug:'watch-se3-40',photos:[],bat:'',desc:'',specKey:'SE 3'},
+  {id:37,name:'Apple Watch SE 3 44mm',price:'от 24.990₽',raw:24990,cat:'Apple Watch',cond:'Новый',slug:'watch-se3-44',photos:[],bat:'',desc:'',specKey:'SE 3'},
+  {id:38,name:'Apple Watch 10 42mm',price:'от 26.290₽',raw:26290,cat:'Apple Watch',cond:'Новый',slug:'watch10-42',photos:[],bat:'',desc:'',specKey:'10'},
+  {id:39,name:'Apple Watch 10 46mm',price:'от 26.990₽',raw:26990,cat:'Apple Watch',cond:'Новый',slug:'watch10-46',photos:[],bat:'',desc:'',specKey:'10'},
+  {id:40,name:'Apple Watch 11 42mm',price:'от 28.490₽',raw:28490,cat:'Apple Watch',cond:'Новый',slug:'watch11-42',photos:[],bat:'',desc:'',specKey:'11'},
+  {id:41,name:'Apple Watch 11 46mm',price:'от 30.490₽',raw:30490,cat:'Apple Watch',cond:'Новый',slug:'watch11-46',photos:[],bat:'',desc:'',specKey:'11'},
+  {id:42,name:'Apple Watch Ultra 2',price:'от 55.490₽',raw:55490,cat:'Apple Watch',cond:'Новый',slug:'watch-ultra2',photos:[],bat:'',desc:'',specKey:'Ultra 2'},
+  {id:43,name:'Apple Watch Ultra 3',price:'от 61.490₽',raw:61490,cat:'Apple Watch',cond:'Новый',slug:'watch-ultra3',photos:[],bat:'',desc:'',specKey:'Ultra 3'},
+  {id:44,name:'Apple Watch Series 8 41mm',price:'9.500₽',raw:9500,cat:'Apple Watch',cond:'Б/У',slug:'watch-s8',photos:[],bat:'80%',desc:'Состояние хорошее. Часы не вскрывались. Все функции работают. Комплект полный.'},
+  {id:45,name:'Apple Watch Series 7 45mm',price:'7.000₽',raw:7000,cat:'Apple Watch',cond:'Б/У',slug:'watch-s7a',photos:[],bat:'80%',desc:'Состояние хорошее. Часы не вскрывались. Все функции работают. АКБ 80%. Комплект полный.'},
+  {id:46,name:'Apple Watch Series 7 45mm',price:'8.000₽',raw:8000,cat:'Apple Watch',cond:'Б/У',slug:'watch-s7b',photos:[],bat:'85%',desc:'Состояние хорошее.'},
+  {id:47,name:'iPad Pro 11 M5',price:'от 77.990₽',raw:77990,cat:'iPad',cond:'Новый',slug:'ipad-pro11-m5',photos:[],bat:'',desc:'',specKey:'Pro 11 M5'},
+  {id:48,name:'iPad Pro 13 M5',price:'от 98.990₽',raw:98990,cat:'iPad',cond:'Новый',slug:'ipad-pro13-m5',photos:[],bat:'',desc:'',specKey:'Pro 13 M5'},
+  {id:49,name:'iPad Air 11 M3',price:'от 44.490₽',raw:44490,cat:'iPad',cond:'Новый',slug:'ipad-air11-m3',photos:[],bat:'',desc:'',specKey:'Air 11 M3'},
+  {id:50,name:'iPad Air 13 M3',price:'от 61.990₽',raw:61990,cat:'iPad',cond:'Новый',slug:'ipad-air13-m3',photos:[],bat:'',desc:'',specKey:'Air 13 M3'},
+  {id:51,name:'iPad Air 11 M4',price:'от 51.490₽',raw:51490,cat:'iPad',cond:'Новый',slug:'ipad-air11-m4',photos:[],bat:'',desc:'',specKey:'Air 11 M4'},
+  {id:52,name:'iPad Air 13 M4',price:'от 72.990₽',raw:72990,cat:'iPad',cond:'Новый',slug:'ipad-air13-m4',photos:[],bat:'',desc:'',specKey:'Air 13 M4'},
+  {id:53,name:'iPad 11',price:'от 30.490₽',raw:30490,cat:'iPad',cond:'Новый',slug:'ipad-11',photos:[],bat:'',desc:'',specKey:'11'},
+  {id:54,name:'MacBook 13 Neo 8/256',price:'от 63.490₽',raw:63490,cat:'MacBook',cond:'Новый',slug:'mb13-neo-256',photos:[],bat:'',desc:'',specKey:'13 Neo'},
+  {id:55,name:'MacBook 13 Neo 8/512',price:'от 72.490₽',raw:72490,cat:'MacBook',cond:'Новый',slug:'mb13-neo-512',photos:[],bat:'',desc:'',specKey:'13 Neo'},
+  {id:56,name:'MacBook Air 13 M4',price:'от 85.490₽',raw:85490,cat:'MacBook',cond:'Новый',slug:'mb-air13-m4',photos:[],bat:'',desc:'',specKey:'Air 13 M4'},
+  {id:57,name:'MacBook Air 15 M4',price:'от 109.990₽',raw:109990,cat:'MacBook',cond:'Новый',slug:'mb-air15-m4',photos:[],bat:'',desc:'',specKey:'Air 15 M4'},
+  {id:58,name:'Dyson HS09 Airwrap Coanda 2x',price:'от 47.990₽',raw:47990,cat:'Dyson',cond:'Новый',slug:'dyson-hs09',photos:[],bat:'',desc:'',specKey:'HS09'},
+  {id:59,name:'Dyson HS05 Complete Long',price:'от 31.490₽',raw:31490,cat:'Dyson',cond:'Новый',slug:'dyson-hs05',photos:[],bat:'',desc:'',specKey:'HS05'},
+  {id:60,name:'Dyson HS08 Complete Long',price:'от 33.990₽',raw:33990,cat:'Dyson',cond:'Новый',slug:'dyson-hs08',photos:[],bat:'',desc:'',specKey:'HS08'},
+  {id:61,name:'Dyson Corrale HS07',price:'от 27.990₽',raw:27990,cat:'Dyson',cond:'Новый',slug:'dyson-hs07',photos:[],bat:'',desc:'',specKey:'HS07'},
+  {id:62,name:'Dyson HT01 Airstrait',price:'от 28.490₽',raw:28490,cat:'Dyson',cond:'Новый',slug:'dyson-ht01',photos:[],bat:'',desc:'',specKey:'HT01'},
+  {id:63,name:'Фен Dyson',price:'от 25.990₽',raw:25990,cat:'Dyson',cond:'Новый',slug:'dyson-fen',photos:[],bat:'',desc:'',specKey:'Фен'},
+  {id:64,name:'Яндекс Станция Лайт 2',price:'от 3.490₽',raw:3490,cat:'Яндекс Станции',cond:'Новый',slug:'ya-lite2',photos:[],bat:'',desc:'',specKey:'Лайт 2'},
+  {id:65,name:'Яндекс Станция Мини 3',price:'от 7.490₽',raw:7490,cat:'Яндекс Станции',cond:'Новый',slug:'ya-mini3',photos:[],bat:'',desc:'',specKey:'Мини 3'},
+  {id:66,name:'Яндекс Станция Миди',price:'от 11.490₽',raw:11490,cat:'Яндекс Станции',cond:'Новый',slug:'ya-midi',photos:[],bat:'',desc:'',specKey:'Миди'},
+  {id:67,name:'Яндекс Станция 3',price:'от 22.790₽',raw:22790,cat:'Яндекс Станции',cond:'Новый',slug:'ya-3',photos:[],bat:'',desc:'',specKey:'3'},
+  {id:68,name:'Яндекс Станция Макс',price:'от 26.990₽',raw:26990,cat:'Яндекс Станции',cond:'Новый',slug:'ya-max',photos:[],bat:'',desc:'',specKey:'Макс'},
+  {id:69,name:'Геймпад Dualsense',price:'от 7.790₽',raw:7790,cat:'PlayStation',cond:'Новый',slug:'ps-dual',photos:[],bat:'',desc:'',specKey:'Dualsense'},
+  {id:70,name:'PlayStation 5 Slim Digital 1Tb',price:'46.490₽',raw:46490,cat:'PlayStation',cond:'Новый',slug:'ps5-slim-d',photos:[],bat:'',desc:'',specKey:'PS5 Slim'},
+  {id:71,name:'PlayStation 5 Slim (с дисководом) 1Tb',price:'52.490₽',raw:52490,cat:'PlayStation',cond:'Новый',slug:'ps5-slim-disc',photos:[],bat:'',desc:'',specKey:'PS5 Slim'},
+  {id:72,name:'PlayStation 5 Pro 1Tb',price:'81.990₽',raw:81990,cat:'PlayStation',cond:'Новый',slug:'ps5-pro',photos:[],bat:'',desc:'',specKey:'PS5 Pro'},
+  {id:73,name:'Samsung S25 FE',price:'от 39.990₽',raw:39990,cat:'Samsung',cond:'Новый',slug:'s25-fe',photos:[],bat:'',desc:'',specKey:'S25 FE'},
+  {id:74,name:'Samsung S25',price:'от 48.390₽',raw:48390,cat:'Samsung',cond:'Новый',slug:'s25',photos:[],bat:'',desc:'',specKey:'S25'},
+  {id:75,name:'Samsung S25+',price:'от 58.490₽',raw:58490,cat:'Samsung',cond:'Новый',slug:'s25p',photos:[],bat:'',desc:'',specKey:'S25+'},
+  {id:76,name:'Samsung S25 Ultra',price:'от 72.490₽',raw:72490,cat:'Samsung',cond:'Новый',slug:'s25u',photos:[],bat:'',desc:'',specKey:'S25 Ultra'},
+  {id:77,name:'Samsung S26',price:'от 64.490₽',raw:64490,cat:'Samsung',cond:'Новый',slug:'s26',photos:[],bat:'',desc:'',specKey:'S26'},
+  {id:78,name:'Samsung S26+',price:'от 73.490₽',raw:73490,cat:'Samsung',cond:'Новый',slug:'s26p',photos:[],bat:'',desc:'',specKey:'S26+'},
+  {id:79,name:'Samsung S26 Ultra',price:'от 86.490₽',raw:86490,cat:'Samsung',cond:'Новый',slug:'s26u',photos:[],bat:'',desc:'',specKey:'S26 Ultra'},
+  {id:80,name:'Кабель Lightning — USB (Новый)',price:'1.000₽',raw:1000,cat:'Аксессуары',cond:'Новый',slug:'cbl-lu-new',photos:[],bat:'',desc:''},
+  {id:81,name:'Кабель Lightning — Type-C (Новый)',price:'1.200₽',raw:1200,cat:'Аксессуары',cond:'Новый',slug:'cbl-ltc-new',photos:[],bat:'',desc:''},
+  {id:82,name:'Кабель Type-C — Type-C (Новый)',price:'1.400₽',raw:1400,cat:'Аксессуары',cond:'Новый',slug:'cbl-cc-new',photos:[],bat:'',desc:''},
+  {id:83,name:'Кабель Lightning — USB (Б/У)',price:'350₽',raw:350,cat:'Аксессуары',cond:'Б/У',slug:'cbl-lu-used',photos:[],bat:'',desc:''},
+  {id:84,name:'Кабель Lightning — Type-C (Б/У)',price:'450₽',raw:450,cat:'Аксессуары',cond:'Б/У',slug:'cbl-ltc-used',photos:[],bat:'',desc:''},
+  {id:85,name:'Кабель Type-C — Type-C (Б/У)',price:'500₽',raw:500,cat:'Аксессуары',cond:'Б/У',slug:'cbl-cc-used',photos:[],bat:'',desc:''},
+  {id:86,name:'Адаптер питания 20W Type-C',price:'2.250₽',raw:2250,cat:'Аксессуары',cond:'Новый',slug:'adapter-20w',photos:[],bat:'',desc:''},
+];
+let nextId = 87;
+
+// ── State
+let aCat='Все', aCond='Все';
+let wishlist = new Set();
+let cart = {}; // id -> qty
+let pendingPhotos = [];
+
+// ── Settings state
+let settings = { theme:'light', catView:'grid' };
+
+// ══════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════
+const CATS_CFG=[
+  {label:'iPhone',icon:'📱'},{label:'Apple Watch',icon:'⌚'},
+  {label:'AirPods',icon:'🎧'},{label:'MacBook',icon:'💻'},
+  {label:'iPad',icon:'📟'},{label:'Samsung',icon:'🤖'},
+  {label:'Dyson',icon:'💨'},{label:'Яндекс Станции',icon:'🔊'},
+  {label:'PlayStation',icon:'🎮'},{label:'Аксессуары',icon:'🔌'},
+];
+
+function getImg(p){
+  return (p.photos && p.photos.length>0) ? p.photos[0] : 'https://picsum.photos/seed/'+p.slug+'/400/400';
+}
+function getSpecs(p){
+  const catSpecs = SPECS_DB[p.cat];
+  if(!catSpecs) return [];
+  if(p.specKey && catSpecs[p.specKey]) return catSpecs[p.specKey];
+  // fuzzy match
+  const keys = Object.keys(catSpecs);
+  for(const k of keys){
+    if(p.name.toLowerCase().includes(k.toLowerCase())) return catSpecs[k];
+  }
+  return [];
+}
+function makeBadge(p){
+  if(p.sub==='Запечатанный') return '<span class="badge badge-sealed">Запечатанный</span>';
+  if(p.cond==='Б/У') return '<span class="badge badge-used">Б/У'+(p.sub?' · '+p.sub:'')+'</span>';
+  return '<span class="badge badge-new">Новый'+(p.sub?' · '+p.sub:'')+'</span>';
+}
+function showToast(msg, dur=2200){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>t.classList.remove('show'),dur);
+}
+function updateBadges(){
+  document.getElementById('wish-badge').textContent=wishlist.size||'';
+  const total=Object.values(cart).reduce((a,b)=>a+b,0);
+  document.getElementById('cart-badge').textContent=total||'';
+}
+
+// ══════════════════════════════════════════════════
+// PAGE ROUTING
+// ══════════════════════════════════════════════════
+const PAGES = ['home','catalog','product','wish','settings','admin'];
+function showPage(name){
+  PAGES.forEach(n=>{ const el=document.getElementById('page-'+n); if(el) el.classList.remove('active'); });
+  const p=document.getElementById('page-'+name); if(p) p.classList.add('active');
+  ['home','catalog','wish','admin'].forEach(n=>{
+    const el=document.getElementById('nl-'+n); if(el) el.classList.toggle('active',n===name);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(name==='catalog') renderCatalog();
+  if(name==='wish') renderWishlist();
+  if(name==='admin') renderAdminTable();
+}
+
+// ══════════════════════════════════════════════════
+// CARD BUILDER
+// ══════════════════════════════════════════════════
+function buildCard(p, extraClass=''){
+  const card=document.createElement('article');
+  card.className='pcard'+extraClass;
+  card.setAttribute('tabindex','0');
+
+  // Image
+  const imgWrap=document.createElement('div');
+  imgWrap.className='pcard-img-wrap';
+  const img=document.createElement('img');
+  img.src=getImg(p); img.alt=p.name; img.loading='lazy'; img.className='pcard-img';
+  // Wishlist button
+  const wb=document.createElement('button');
+  wb.className='pcard-wish'+(wishlist.has(p.id)?' active':'');
+  wb.innerHTML=wishlist.has(p.id)?'❤️':'🤍';
+  wb.setAttribute('aria-label','В избранное');
+  wb.addEventListener('click',e=>{e.stopPropagation();toggleWish(p.id,wb);});
+  imgWrap.append(img,wb);
+
+  // Body
+  const body=document.createElement('div'); body.className='pcard-body';
+  const top=document.createElement('div'); top.className='pcard-top';
+  const bdg=document.createElement('span'); bdg.innerHTML=makeBadge(p);
+  const cat=document.createElement('span'); cat.className='pcard-cat'; cat.textContent=p.cat;
+  top.append(bdg,cat);
+  const nm=document.createElement('p'); nm.className='pcard-name'; nm.textContent=p.name;
+  const pr=document.createElement('p'); pr.className='pcard-price'; pr.textContent=p.price;
+
+  // Mini specs (if enabled)
+  const showSpecs=document.getElementById('show-specs-toggle')?.checked!==false;
+  if(showSpecs){
+    const sp=getSpecs(p);
+    if(sp.length>0){
+      const spWrap=document.createElement('div');
+      spWrap.style.cssText='display:flex;flex-direction:column;gap:3px;';
+      sp.slice(0,2).forEach(s=>{
+        const sd=document.createElement('div');
+        sd.style.cssText='font-size:11px;color:var(--text3);';
+        sd.textContent='· '+s;
+        spWrap.appendChild(sd);
+      });
+      body.append(top,nm,pr,spWrap);
+    } else {
+      body.append(top,nm,pr);
+    }
+  } else {
+    body.append(top,nm,pr);
+  }
+
+  // Actions
+  const actions=document.createElement('div'); actions.className='pcard-actions';
+  const tgBtn=document.createElement('a');
+  tgBtn.href='https://t.me/vanzastore78'; tgBtn.target='_blank'; tgBtn.rel='noopener noreferrer';
+  tgBtn.className='pcard-buy'; tgBtn.textContent='Уточнить';
+  tgBtn.addEventListener('click',e=>e.stopPropagation());
+  const cartBtn=document.createElement('button');
+  cartBtn.className='pcard-cart'+(cart[p.id]?' added':'');
+  cartBtn.innerHTML=cart[p.id]?'✓':'🛒';
+  cartBtn.setAttribute('aria-label','В корзину');
+  cartBtn.addEventListener('click',e=>{e.stopPropagation();addToCart(p.id,cartBtn);});
+  actions.append(tgBtn,cartBtn);
+  body.appendChild(actions);
+
+  card.append(imgWrap,body);
+  card.addEventListener('click',()=>openProduct(p.id));
+  card.addEventListener('keydown',e=>{ if(e.key==='Enter') openProduct(p.id); });
+  return card;
+}
+
+// ══════════════════════════════════════════════════
+// CATALOG FILTERS & RENDER
+// ══════════════════════════════════════════════════
+function renderCatalog(){
+  buildSidebar();
+  applyFilters();
+}
+function buildSidebar(){
+  const sb=document.getElementById('sb-cats'); if(!sb) return;
+  sb.innerHTML='';
+  const all=document.createElement('button');
+  all.className='sb-btn'+(aCat==='Все'?' active':'');
+  all.setAttribute('data-sbcat','Все');
+  all.onclick=()=>setCat('Все');
+  all.innerHTML='Все категории <span class="sb-cnt">'+PRODUCTS.length+'</span>';
+  sb.appendChild(all);
+  CATS_CFG.forEach(c=>{
+    const cnt=PRODUCTS.filter(p=>p.cat===c.label).length;
+    const btn=document.createElement('button');
+    btn.className='sb-btn'+(aCat===c.label?' active':'');
+    btn.setAttribute('data-sbcat',c.label);
+    btn.onclick=()=>setCat(c.label);
+    btn.innerHTML=c.icon+' '+c.label+' <span class="sb-cnt">'+cnt+'</span>';
+    sb.appendChild(btn);
+  });
+  // Condition counts
+  const sc_all=document.getElementById('sc-all'); if(sc_all) sc_all.textContent=PRODUCTS.length;
+  const sc_new=document.getElementById('sc-new'); if(sc_new) sc_new.textContent=PRODUCTS.filter(p=>p.cond==='Новый').length;
+  const sc_used=document.getElementById('sc-used'); if(sc_used) sc_used.textContent=PRODUCTS.filter(p=>p.cond==='Б/У').length;
+}
+function applyFilters(){
+  const grid=document.getElementById('pgrid'); if(!grid) return;
+  const empty=document.getElementById('empty-state');
+  const cnt=document.getElementById('cat-count');
+  const minP=parseFloat(document.getElementById('price-min')?.value)||0;
+  const maxP=parseFloat(document.getElementById('price-max')?.value)||Infinity;
+  const sort=document.getElementById('sort-sel')?.value||'default';
+
+  let list=PRODUCTS.filter(p=>{
+    const catOk=aCat==='Все'||p.cat===aCat;
+    const condOk=aCond==='Все'||p.cond===aCond;
+    const priceOk=p.raw>=minP&&p.raw<=maxP;
+    return catOk&&condOk&&priceOk;
+  });
+
+  if(sort==='price-asc') list.sort((a,b)=>a.raw-b.raw);
+  else if(sort==='price-desc') list.sort((a,b)=>b.raw-a.raw);
+  else if(sort==='name') list.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+  else if(sort==='new-first') list.sort((a,b)=>a.cond==='Новый'?-1:1);
+  else if(sort==='used-first') list.sort((a,b)=>a.cond==='Б/У'?-1:1);
+
+  cnt.textContent=list.length+' товаров';
+  grid.innerHTML='';
+  const useList=settings.catView==='list';
+  if(useList) grid.style.gridTemplateColumns='1fr';
+  else grid.style.gridTemplateColumns='';
+
+  if(!list.length){ grid.style.display='none'; empty.style.display='block'; return; }
+  grid.style.display='grid'; empty.style.display='none';
+  const frag=document.createDocumentFragment();
+  list.forEach(p=>frag.appendChild(buildCard(p)));
+  grid.appendChild(frag);
+}
+function setCat(v){
+  aCat=v;
+  document.querySelectorAll('[data-sbcat]').forEach(b=>b.classList.toggle('active',b.dataset.sbcat===v));
+  document.querySelectorAll('[data-mcat]').forEach(b=>b.classList.toggle('active',b.dataset.mcat===v));
+  applyFilters();
+}
+function setCond(v){
+  aCond=v;
+  document.querySelectorAll('[data-sbcond]').forEach(b=>b.classList.toggle('active',b.dataset.sbcond===v));
+  document.querySelectorAll('[data-mcond]').forEach(b=>b.classList.toggle('active',b.dataset.mcond===v));
+  applyFilters();
+}
+function resetFilters(){
+  aCat='Все'; aCond='Все';
+  const pm=document.getElementById('price-min'); if(pm) pm.value='';
+  const px=document.getElementById('price-max'); if(px) px.value='';
+  document.getElementById('sort-sel').value='default';
+  document.querySelectorAll('[data-sbcat]').forEach(b=>b.classList.toggle('active',b.dataset.sbcat==='Все'));
+  document.querySelectorAll('[data-sbcond]').forEach(b=>b.classList.toggle('active',b.dataset.sbcond==='Все'));
+  document.querySelectorAll('[data-mcat]').forEach(b=>b.classList.toggle('active',b.dataset.mcat==='Все'));
+  document.querySelectorAll('[data-mcond]').forEach(b=>b.classList.toggle('active',b.dataset.mcond==='Все'));
+  applyFilters();
+}
+
+// ══════════════════════════════════════════════════
+// PRODUCT DETAIL
+// ══════════════════════════════════════════════════
+function openProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id); if(!p) return;
+  const layout=document.getElementById('detail-layout');
+  layout.innerHTML='';
+
+  // Gallery col
+  const gCol=document.createElement('div'); gCol.className='detail-gallery';
+  const allImgs=p.photos.length>0?p.photos:['https://picsum.photos/seed/'+p.slug+'/800/800'];
+  const mainImg=document.createElement('img'); mainImg.src=allImgs[0]; mainImg.alt=p.name; mainImg.className='detail-main-img';
+  const thumbs=document.createElement('div'); thumbs.className='detail-thumbs';
+  allImgs.forEach((src,i)=>{
+    const t=document.createElement('img'); t.src=src; t.alt=p.name; t.loading='lazy';
+    t.className='det-thumb'+(i===0?' active':'');
+    t.onclick=()=>{mainImg.src=src;thumbs.querySelectorAll('.det-thumb').forEach(x=>x.classList.remove('active'));t.classList.add('active');};
+    thumbs.appendChild(t);
+  });
+  // Upload more photos
+  const upZone=document.createElement('div'); upZone.className='det-upload';
+  upZone.innerHTML='<input type="file" accept="image/*" multiple/><p class="det-upload-txt">📷 Добавить фото к товару</p>';
+  upZone.querySelector('input').addEventListener('change',function(){
+    Array.from(this.files).forEach(f=>{
+      const url=URL.createObjectURL(f);
+      p.photos.push(url);
+      const t=document.createElement('img'); t.src=url; t.alt=''; t.loading='lazy';
+      t.className='det-thumb'; t.onclick=()=>{mainImg.src=url;thumbs.querySelectorAll('.det-thumb').forEach(x=>x.classList.remove('active'));t.classList.add('active');};
+      thumbs.appendChild(t);
+    });
+    showToast('📷 Фото добавлено!');
+  });
+  gCol.append(mainImg,thumbs,upZone);
+
+  // Info col
+  const iCol=document.createElement('div'); iCol.className='detail-info';
+  const tag=document.createElement('div'); tag.className='detail-tag'; tag.textContent=p.cat;
+  const nm=document.createElement('h1'); nm.className='detail-name'; nm.textContent=p.name;
+  const pr=document.createElement('div'); pr.className='detail-price'; pr.textContent=p.price;
+
+  // Actions
+  const act=document.createElement('div'); act.className='detail-actions';
+  const buyA=document.createElement('a'); buyA.href='https://t.me/vanzastore78'; buyA.target='_blank'; buyA.rel='noopener noreferrer';
+  buyA.className='btn btn-primary det-buy'; buyA.textContent='✈️ Купить в Telegram';
+  const wishBtn=document.createElement('button'); wishBtn.className='det-wish-btn'+(wishlist.has(id)?' active':'');
+  wishBtn.innerHTML=wishlist.has(id)?'❤️':'🤍'; wishBtn.setAttribute('aria-label','В избранное');
+  wishBtn.onclick=()=>{toggleWish(id,wishBtn);wishBtn.innerHTML=wishlist.has(id)?'❤️':'🤍';wishBtn.classList.toggle('active',wishlist.has(id));};
+  const cartB=document.createElement('button'); cartB.className='det-cart-btn'+(cart[id]?' added':'');
+  cartB.innerHTML=cart[id]?'✓':'🛒'; cartB.setAttribute('aria-label','В корзину');
+  cartB.onclick=()=>{addToCart(id,cartB);cartB.innerHTML=cart[id]?'✓':'🛒';};
+  act.append(buyA,wishBtn,cartB);
+
+  // Specs table
+  const specs=getSpecs(p);
+  if(specs.length>0){
+    const sb=document.createElement('div'); sb.className='specs-box';
+    const sh=document.createElement('h4'); sh.textContent='Характеристики'; sb.appendChild(sh);
+    specs.forEach(s=>{
+      const row=document.createElement('div'); row.className='spec-row';
+      const[k,...rest]=s.split(':');
+      const kEl=document.createElement('span'); kEl.className='sk'; kEl.textContent=k.trim();
+      const vEl=document.createElement('span'); vEl.className='sv'; vEl.textContent=rest.join(':').trim()||'—';
+      row.append(kEl,vEl); sb.appendChild(row);
+    });
+    // Extra rows
+    const extraRows=[
+      ['Состояние',p.cond+(p.sub?' · '+p.sub:'')],
+      ...(p.bat?[['АКБ',p.bat]]:[]),
+      ['Комплект',p.cond==='Новый'?'Полный комплект':'Уточняйте'],
+      ['Гарантия',p.cond==='Новый'?'Гарантия магазина':'Обмен 14 дней'],
+    ];
+    extraRows.forEach(([k,v])=>{
+      const row=document.createElement('div'); row.className='spec-row';
+      const kEl=document.createElement('span'); kEl.className='sk'; kEl.textContent=k;
+      const vEl=document.createElement('span'); vEl.className='sv'; vEl.textContent=v;
+      row.append(kEl,vEl); sb.appendChild(row);
+    });
+    iCol.append(tag,nm,pr,act,sb);
+  } else {
+    const sb2=document.createElement('div'); sb2.className='specs-box';
+    const sh=document.createElement('h4'); sh.textContent='Информация'; sb2.appendChild(sh);
+    [['Состояние',p.cond+(p.sub?' · '+p.sub:'')],
+     ...(p.bat?[['АКБ',p.bat]]:[]),
+     ['Комплект',p.cond==='Новый'?'Полный комплект':'Уточняйте'],
+     ['Гарантия',p.cond==='Новый'?'Гарантия магазина':'Обмен 14 дней'],
+     ['Доставка','По Санкт-Петербургу'],
+    ].forEach(([k,v])=>{
+      const row=document.createElement('div'); row.className='spec-row';
+      const kEl=document.createElement('span'); kEl.className='sk'; kEl.textContent=k;
+      const vEl=document.createElement('span'); vEl.className='sv'; vEl.textContent=v;
+      row.append(kEl,vEl); sb2.appendChild(row);
+    });
+    iCol.append(tag,nm,pr,act,sb2);
+  }
+  if(p.desc){
+    const dd=document.createElement('div'); dd.className='detail-desc'; dd.textContent=p.desc;
+    iCol.appendChild(dd);
+  }
+  const note=document.createElement('p'); note.className='detail-note';
+  note.textContent='Цены уточняйте в Telegram · Менеджер: @vaaanza · +7 (981) 160-73-98';
+  iCol.appendChild(note);
+
+  layout.append(gCol,iCol);
+  showPage('product');
+  window.location.hash='product-'+id;
+}
+
+// ══════════════════════════════════════════════════
+// WISHLIST
+// ══════════════════════════════════════════════════
+function toggleWish(id,btn){
+  if(wishlist.has(id)){wishlist.delete(id);showToast('Удалено из избранного');}
+  else{wishlist.add(id);showToast('❤️ Добавлено в избранное');}
+  if(btn){btn.classList.toggle('active',wishlist.has(id));btn.innerHTML=wishlist.has(id)?'❤️':'🤍';}
+  updateBadges();
+}
+function renderWishlist(){
+  const grid=document.getElementById('wish-grid');
+  const empty=document.getElementById('wish-empty');
+  const sub=document.getElementById('wish-sub');
+  if(!grid) return;
+  grid.innerHTML='';
+  const items=PRODUCTS.filter(p=>wishlist.has(p.id));
+  sub.textContent=items.length?items.length+' товаров в избранном':'Здесь хранятся отложенные товары';
+  if(!items.length){grid.style.display='none';empty.style.display='block';return;}
+  grid.style.display='grid';empty.style.display='none';
+  const frag=document.createDocumentFragment();
+  items.forEach(p=>frag.appendChild(buildCard(p)));
+  grid.appendChild(frag);
+}
+
+// ══════════════════════════════════════════════════
+// CART
+// ══════════════════════════════════════════════════
+function addToCart(id,btn){
+  cart[id]=(cart[id]||0)+1;
+  if(btn){btn.classList.add('added');btn.innerHTML='✓';}
+  showToast('🛒 Добавлено в корзину');
+  updateBadges();
+  renderCart();
+}
+function removeFromCart(id){
+  delete cart[id];
+  updateBadges();
+  renderCart();
+}
+function changeQty(id,delta){
+  cart[id]=(cart[id]||0)+delta;
+  if(cart[id]<=0) delete cart[id];
+  updateBadges();
+  renderCart();
+}
+function openCart(){
+  renderCart();
+  document.getElementById('cart-drawer').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('open');
+}
+function closeCart(){
+  document.getElementById('cart-drawer').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('open');
+}
+function renderCart(){
+  const body=document.getElementById('cart-body');
+  const footer=document.getElementById('cart-footer');
+  const totalEl=document.getElementById('cart-total');
+  const tgLink=document.getElementById('cart-tg-link');
+  body.innerHTML='';
+  const ids=Object.keys(cart).map(Number);
+  if(!ids.length){
+    body.innerHTML='<div class="cart-empty"><div>🛒</div><p>Корзина пуста</p></div>';
+    footer.style.display='none'; return;
+  }
+  footer.style.display='block';
+  let total=0;
+  let tgMsg='Хочу заказать:\n';
+  ids.forEach(id=>{
+    const p=PRODUCTS.find(x=>x.id===id); if(!p) return;
+    const qty=cart[id];
+    total+=p.raw*qty;
+    tgMsg+=`• ${p.name} (${p.price}) × ${qty}\n`;
+    const item=document.createElement('div'); item.className='cart-item';
+    const img=document.createElement('img'); img.src=getImg(p); img.alt=p.name; img.className='cart-item-img'; img.loading='lazy';
+    const info=document.createElement('div');
+    const inm=document.createElement('div'); inm.className='cart-item-name'; inm.textContent=p.name;
+    const ipr=document.createElement('div'); ipr.className='cart-item-price'; ipr.textContent=p.price;
+    const iqty=document.createElement('div'); iqty.className='cart-qty';
+    const qm=document.createElement('button'); qm.className='qty-btn'; qm.textContent='−'; qm.onclick=()=>changeQty(id,-1);
+    const qv=document.createElement('span'); qv.className='qty-val'; qv.textContent=qty;
+    const qp=document.createElement('button'); qp.className='qty-btn'; qp.textContent='+'; qp.onclick=()=>changeQty(id,1);
+    iqty.append(qm,qv,qp);
+    info.append(inm,ipr,iqty);
+    const del=document.createElement('button'); del.className='cart-del'; del.innerHTML='🗑️'; del.onclick=()=>removeFromCart(id);
+    item.append(img,info,del);
+    body.appendChild(item);
+  });
+  const rawTotal=total>0?total.toLocaleString('ru')+'₽':'Уточнить';
+  totalEl.textContent=rawTotal;
+  tgLink.href='https://t.me/vanzastore78?text='+encodeURIComponent(tgMsg+'Итого: ~'+rawTotal);
+}
+
+// ══════════════════════════════════════════════════
+// SETTINGS
+// ══════════════════════════════════════════════════
+function setTheme(v){
+  settings.theme=v;
+  let t=v;
+  if(v==='auto') t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+  ['light','dark','auto'].forEach(n=>{
+    const el=document.getElementById('theme-'+n+'-opt');
+    if(el) el.classList.toggle('active',n===v);
+  });
+}
+const ACCENTS={
+  default:{navy:'#0D2B5E',blue:'#1A56DB','blue-l':'#EBF1FF'},
+  blue:{navy:'#1A56DB',blue:'#3B82F6','blue-l':'#DBEAFE'},
+  teal:{navy:'#0D9488',blue:'#14B8A6','blue-l':'#CCFBF1'},
+  violet:{navy:'#7C3AED',blue:'#A78BFA','blue-l':'#EDE9FE'},
+  red:{navy:'#DC2626',blue:'#EF4444','blue-l':'#FEE2E2'},
+};
+function setAccent(key,el){
+  document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  const a=ACCENTS[key]||ACCENTS.default;
+  document.documentElement.style.setProperty('--navy',a.navy);
+  document.documentElement.style.setProperty('--blue',a.blue);
+  document.documentElement.style.setProperty('--blue-l',a['blue-l']);
+}
+function setFontSize(sz,el){
+  document.documentElement.style.fontSize=sz+'px';
+  document.querySelectorAll('.fsz').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+function setCatView(v){
+  settings.catView=v;
+  document.getElementById('grid-opt').classList.toggle('active',v==='grid');
+  document.getElementById('list-opt').classList.toggle('active',v==='list');
+  if(document.getElementById('page-catalog').classList.contains('active')) applyFilters();
+}
+function resetAll(){
+  if(!confirm('Очистить корзину и избранное?')) return;
+  cart={}; wishlist.clear(); updateBadges(); renderCart();
+  showToast('Данные сброшены');
+}
+
+// ══════════════════════════════════════════════════
+// HOME PAGE
+// ══════════════════════════════════════════════════
+function buildHomeCategories(){
+  const g=document.getElementById('cats-home'); if(!g) return;
+  CATS_CFG.forEach(c=>{
+    const t=document.createElement('button'); t.className='cat-tile';
+    t.onclick=()=>{showPage('catalog');setTimeout(()=>setCat(c.label),60);};
+    t.innerHTML='<div class="cat-ico">'+c.icon+'</div><span class="cat-lbl">'+c.label+'</span>';
+    g.appendChild(t);
+  });
+}
+function buildFeatured(){
+  const g=document.getElementById('featured-grid'); if(!g) return;
+  const used=PRODUCTS.filter(p=>p.cond==='Б/У').slice(0,4);
+  used.forEach(p=>g.appendChild(buildCard(p)));
+}
+
+// ══════════════════════════════════════════════════
+// ADMIN
+// ══════════════════════════════════════════════════
+function switchAdminTab(tab,btn){
+  document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('atab-add').style.display=tab==='add'?'block':'none';
+  document.getElementById('atab-list').style.display=tab==='list'?'block':'none';
+  if(tab==='list') renderAdminTable();
+}
+function handleAdminPhotos(inp){
+  const prev=document.getElementById('admin-previews');
+  prev.innerHTML=''; pendingPhotos=[];
+  Array.from(inp.files).forEach(f=>{
+    const url=URL.createObjectURL(f); pendingPhotos.push(url);
+    const img=document.createElement('img'); img.src=url; img.className='up-prev'; img.alt='';
+    prev.appendChild(img);
+  });
+}
+function addProduct(){
+  const name=document.getElementById('f-name').value.trim();
+  const price=document.getElementById('f-price').value.trim();
+  if(!name||!price){alert('Заполните название и цену');return;}
+  const raw=parseFloat(price.replace(/[^0-9.]/g,''))||0;
+  PRODUCTS.unshift({
+    id:nextId++, name, price, raw,
+    cat:document.getElementById('f-cat').value,
+    cond:document.getElementById('f-cond').value,
+    sub:document.getElementById('f-sub').value.trim()||undefined,
+    bat:document.getElementById('f-bat').value.trim(),
+    desc:document.getElementById('f-desc').value.trim(),
+    slug:'product-'+(nextId-1),
+    photos:[...pendingPhotos],
+  });
+  ['f-name','f-price','f-sub','f-bat','f-desc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('admin-previews').innerHTML='';
+  document.getElementById('admin-photo-input').value='';
+  pendingPhotos=[];
+  showToast('✅ Товар добавлен!');
+}
+function renderAdminTable(){
+  const tb=document.getElementById('admin-tbody'); if(!tb) return;
+  tb.innerHTML='';
+  PRODUCTS.forEach(p=>{
+    const tr=document.createElement('tr');
+    const imgSrc=getImg(p);
+    tr.innerHTML=
+      '<td><img src="'+imgSrc+'" class="atbl-img" alt="'+p.name+'" loading="lazy"/></td>'+
+      '<td style="font-weight:600;max-width:180px;font-size:12px;">'+p.name+'</td>'+
+      '<td style="font-weight:700;color:var(--navy);white-space:nowrap;font-size:12px;">'+p.price+'</td>'+
+      '<td style="font-size:12px;">'+p.cat+'</td>'+
+      '<td>'+makeBadge(p)+'</td>'+
+      '<td style="white-space:nowrap;">'+
+        '<button class="abtn" onclick="openProduct('+p.id+');closeAdmin()">Просмотр</button>'+
+        '<button class="abtn abtn-del" onclick="delProduct('+p.id+')">Удалить</button>'+
+      '</td>';
+    tb.appendChild(tr);
+  });
+}
+function delProduct(id){
+  if(!confirm('Удалить?')) return;
+  PRODUCTS=PRODUCTS.filter(p=>p.id!==id);
+  renderAdminTable(); showToast('Удалено');
+}
+function closeAdmin(){ /* just navigate to detail */ }
+
+// Drag & drop upload
+['admin-upload-zone'].forEach(zid=>{
+  const z=document.getElementById(zid); if(!z) return;
+  z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag');});
+  z.addEventListener('dragleave',()=>z.classList.remove('drag'));
+  z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag');const i=z.querySelector('input');if(i){i.files=e.dataTransfer.files;if(zid==='admin-upload-zone')handleAdminPhotos(i);}});
+});
+
+// ══════════════════════════════════════════════════
+// MOBILE MENU
+// ══════════════════════════════════════════════════
+function openMob(){document.getElementById('mob-drawer').classList.add('open');document.getElementById('mob-overlay').classList.add('open');}
+function closeMob(){document.getElementById('mob-drawer').classList.remove('open');document.getElementById('mob-overlay').classList.remove('open');}
+
+// ══════════════════════════════════════════════════
+// HASH ROUTING
+// ══════════════════════════════════════════════════
+function handleHash(){
+  const h=window.location.hash;
+  if(h.startsWith('#product-')){const id=parseInt(h.slice(9));if(!isNaN(id)){openProduct(id);return;}}
+  if(h==='#catalog'){showPage('catalog');return;}
+  showPage('home');
+}
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  buildHomeCategories();
+  buildFeatured();
+  updateBadges();
+  handleHash();
+});
+window.addEventListener('hashchange',handleHash);
+window.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeMob();closeCart();}
+});
+// Auto theme
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
+  if(settings.theme==='auto') setTheme('auto');
+});
+</script>
+</body>
+</html>
